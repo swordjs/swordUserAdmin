@@ -1,0 +1,25 @@
+{
+  "passwordSecret": "PyFZVwsT9QVXoeeh",
+  "tokenSecret": "LCMsnrTFpsYmHyC4",
+  "tokenExpiresIn": 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999,
+  "bindTokenToDevice": false,
+  "passwordErrorLimit": 5,
+  "tokenExpiresThreshold": 600,
+  "passwordErrorRetryTime": 3600,
+  "mp-weixin": {
+    "oauth": {
+      "weixin": {
+        "appid": "wxe3f7d53545e88cb6",
+        "appsecret": "03c3177ca4b42af1afd0f0bef0fc4fc5"
+      }
+    }
+  },
+  "service": {
+    "sms": {
+      "name": "剑指题解",
+      "codeExpiresIn": 600,
+      "smsKey": "5a0fb40326bed32d3a619810385d9240",
+      "smsSecret": "81506ab647c12232bfed03fba7e12442"
+    }
+  }
+}
