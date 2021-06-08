@@ -49,12 +49,10 @@
 	import {
 		getDeviceUUID
 	} from '@/js_sdk/uni-admin/util.js'
-
 	const captchaOptions = {
 		deviceId: getDeviceUUID(),
 		scene: 'login'
 	}
-
 	export default {
 		data() {
 			return {
