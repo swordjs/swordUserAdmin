@@ -132,6 +132,30 @@
           "style": {
             "navigationBarTitleText": "专区详情"
           }
+        },
+        {
+          "path": "tag/add",
+          "style": {
+            "navigationBarTitleText": "新增标签"
+          }
+        },
+        {
+          "path": "tag/edit",
+          "style": {
+            "navigationBarTitleText": "编辑标签"
+          }
+        },
+        {
+          "path": "tag/list",
+          "style": {
+            "navigationBarTitleText": "专区标签"
+          }
+        },
+        {
+          "path": "tag/detail",
+          "style": {
+            "navigationBarTitleText": "专区标签"
+          }
         }
       ]
     },

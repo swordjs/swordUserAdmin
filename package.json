@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/dcloudio/uni-template-admin#readme",
   "dependencies": {
+    "dayjs": "^1.10.5",
     "vue-json-excel": "^0.3.0"
   },
   "dcloudext": {

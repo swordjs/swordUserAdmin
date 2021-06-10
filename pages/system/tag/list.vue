@@ -27,7 +27,7 @@
 			</view>
 		</view>
 		<view class="uni-container">
-			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionArea" :options="options" :where="where"
+			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionTag,questionArea" :options="options" :where="where"
 				page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
 				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
@@ -35,18 +35,16 @@
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>
 						<uni-th width="150" align="center">专区名称</uni-th>
-						<uni-th align="center">图片</uni-th>
-						<uni-th width="170" align="center">状态</uni-th>
+						<uni-th width="250" align="center">标签名称</uni-th>
 						<uni-th width="170" align="center">创建时间</uni-th>
 						<uni-th width="160" align="center">操作</uni-th>
 					</uni-tr>
 					<uni-tr v-for="(item, index) in data" :key="index">
 						<uni-td align="center">{{ item._id }}</uni-td>
-						<uni-td align="center">{{ item.name }}</uni-td>
+						<uni-td align="center">{{ item.areaID[0].name }}</uni-td>
 						<uni-td align="center">
-							<image style="width: 90rpx;height: 90rpx;" :src="item.iconPath" mode=""></image>
+							{{item.name}}
 						</uni-td>
-						<uni-td align="center">{{ item.state }}</uni-td>
 						<uni-td align="center"> {{item.createDate}}</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
