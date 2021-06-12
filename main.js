@@ -1,15 +1,18 @@
-import Vue from 'vue'
-import App from './App'
-import store from './store'
-import plugin from './js_sdk/uni-admin/plugin'
-Vue.config.productionTip = false
+import Vue from "vue";
+import App from "./App";
+import store from "./store";
+import plugin from "./js_sdk/uni-admin/plugin";
+import "ant-design-vue/dist/antd.css";
 
-Vue.use(plugin)
+import Antd from "ant-design-vue";
+Vue.config.productionTip = false;
+Vue.use(Antd);
+Vue.use(plugin);
 
-App.mpType = 'app'
+App.mpType = "app";
 
 const app = new Vue({
-    store,
-    ...App
-})
-app.$mount()
+  store,
+  ...App,
+});
+app.$mount();

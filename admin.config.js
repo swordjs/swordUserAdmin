@@ -9,13 +9,13 @@ export default {
 		url: '/pages/error/404' // 404 Not Found 错误页面路径
 	},
 	navBar: { // 顶部导航
-		logo: '/static/logo.png', // 左侧 Logo
+		logo: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-c7e81452-9d28-4486-bedc-5dbf7c8386a5/43743ae3-1249-4ca6-a3a1-bb96afee3e1e.png', // 左侧 Logo
 		links: [{ // 右侧链接
-			text: '框架文档',
-			url: 'https://uniapp.dcloud.net.cn/uniCloud/admin'
+			text: '剑指题解-小程序',
+			url: 'https://ext.dcloud.net.cn/plugin?id=4637'
 		}, {
-			text: '更多插件',
-			url: 'https://ext.dcloud.net.cn/?cat1=7&cat2=74'
+			text: '文档',
+			url: 'https://www.yuque.com/mlgrgm/lmm8g4'
 		}],
 		debug: {
 			enable: process.env.NODE_ENV !== 'production', //是否显示错误信息

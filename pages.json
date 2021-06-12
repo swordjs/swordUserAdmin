@@ -156,6 +156,12 @@
           "style": {
             "navigationBarTitleText": "专区标签"
           }
+        },
+        {
+          "path": "question/list",
+          "style": {
+            "navigationBarTitleText": "审核题目"
+          }
         }
       ]
     },
