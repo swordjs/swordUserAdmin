@@ -1,10 +1,6 @@
 <template>
-	<view class="uni-badge--x">
-		<slot />
-		<text v-if="text" :class="classNames" :style="[badgeWidth, positionStyle, customStyle, dotStyle]"
-			class="uni-badge"
-			@click="onClick()">{{displayValue}}</text>
-	</view>
+	<text v-if="text" :class="inverted ? 'uni-badge--' + type + ' uni-badge--' + size + ' uni-badge--' + type + '-inverted' : 'uni-badge--' + type + ' uni-badge--' + size"
+	 :style="badgeStyle" class="uni-badge" @click="onClick()">{{ text }}</text>
 </template>
 
 <script>
@@ -37,24 +33,6 @@
 				type: Boolean,
 				default: false
 			},
-			isDot: {
-				type: Boolean,
-				default: false
-			},
-			maxNum: {
-				type: Number,
-				default: 99
-			},
-			absolute: {
-				type: String,
-				default: ''
-			},
-			offset: {
-				type: Array,
-				default () {
-					return [0, 0]
-				}
-			},
 			text: {
 				type: [String, Number],
 				default: ''
@@ -62,86 +40,25 @@
 			size: {
 				type: String,
 				default: 'normal'
-			},
-			customStyle: {
-				type: Object,
-				default () {
-					return {}
-				}
 			}
 		},
 		data() {
-			return {};
+			return {
+				badgeStyle: ''
+			};
 		},
-		computed: {
-			width() {
-				return String(this.text).length * 8 + 12
-			},
-			classNames() {
-				const {
-					inverted,
-					type,
-					size,
-					absolute
-				} = this
-				return [
-					inverted ? 'uni-badge--' + type + '-inverted' : '',
-					'uni-badge--' + type,
-					'uni-badge--' + size,
-					absolute ? 'uni-badge--absolute' : ''
-				]
-			},
-			positionStyle() {
-				if (!this.absolute) return {}
-				let w = this.width / 2,
-					h = 10
-				if (this.isDot) {
-					w = 5
-					h = 5
-				}
-				const x = `${- w  + this.offset[0]}px`
-				const y = `${- h + this.offset[1]}px`
-
-				const whiteList = {
-					rightTop: {
-						right: x,
-						top: y
-					},
-					rightBottom: {
-						right: x,
-						bottom: y
-					},
-					leftBottom: {
-						left: x,
-						bottom: y
-					},
-					leftTop: {
-						left: x,
-						top: y
-					}
-				}
-				const match = whiteList[this.absolute]
-				return match ? match : whiteList['rightTop']
-			},
-			badgeWidth() {
-				return {
-					width: `${this.width}px`
-				}
-			},
-			dotStyle() {
-				if (!this.isDot) return {}
-				return {
-					width: '10px',
-					height: '10px',
-					borderRadius: '10px'
-				}
-			},
-			displayValue() {
-				const { isDot, text, maxNum } = this
-				return isDot ? '' : (Number(text) > maxNum ? `${maxNum}+` : text)
+		watch: {
+			text() {
+				this.setStyle()
 			}
 		},
+		mounted() {
+			this.setStyle()
+		},
 		methods: {
+			setStyle() {
+				this.badgeStyle = `width: ${String(this.text).length * 8 + 12}px`
+			},
 			onClick() {
 				this.$emit('click');
 			}
@@ -154,25 +71,11 @@
 	$bage-small: scale(0.8);
 	$bage-height: 20px;
 
-	.uni-badge--x {
-		/* #ifdef APP-NVUE */
-		align-self: flex-start;
-		/* #endif */
-		/* #ifndef APP-NVUE */
-		display: inline-block;
-		/* #endif */
-		position: relative;
-	}
-
-	.uni-badge--absolute {
-		position: absolute;
-	}
-
 	.uni-badge {
-		/* #ifndef APP-NVUE */
+		/* #ifndef APP-PLUS */
 		display: flex;
-		overflow: hidden;
 		box-sizing: border-box;
+		overflow: hidden;
 		/* #endif */
 		justify-content: center;
 		flex-direction: row;
@@ -185,6 +88,7 @@
 		text-align: center;
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		font-size: $bage-size;
+		padding: 0px 6px;
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */

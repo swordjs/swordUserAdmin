@@ -30,7 +30,13 @@ export default {
 	},
 	sideBar: { // 左侧菜单
 		// 配置静态菜单列表（放置在用户被授权的菜单列表下边）
-		staticMenu: [{
+		staticMenu: []
+	}
+}
+
+
+/**
+ * staticMenu: [{
 			menu_id: "demo",
 			name: '静态功能演示',
 			icon: 'uni-icons-list',
@@ -47,5 +53,6 @@ export default {
 				url: '/pages/demo/table/table',
 			}]
 		}]
-	}
-}
+
+ 
+ */
