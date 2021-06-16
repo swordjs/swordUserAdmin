@@ -24,7 +24,16 @@
         "navigationBarTitleText": "修改密码"
       }
     }
-  ],
+      ,{
+            "path" : "pages/question/list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
   "subPackages": [
     {
       "root": "pages/system",
