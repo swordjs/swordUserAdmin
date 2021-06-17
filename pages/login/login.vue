@@ -157,6 +157,8 @@ export default {
             token: res.token,
             tokenExpired: res.tokenExpired,
           });
+		  // 存储用户ID
+		  uni.setStorageSync("uid", res.uid);
           return this.init().then(() => {
             uni.showToast({
               title: "登录成功",
