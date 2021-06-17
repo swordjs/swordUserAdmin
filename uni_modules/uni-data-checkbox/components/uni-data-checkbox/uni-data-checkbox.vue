@@ -171,7 +171,7 @@
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			this.formItem && this.formItem.setValue(this.value)
-
+			
 			if (this.formItem) {
 				if (this.formItem.name) {
 					this.rename = this.formItem.name

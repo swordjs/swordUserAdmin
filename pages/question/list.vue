@@ -11,7 +11,7 @@
 					搜索
 				</button>
 				<button @click="navigateTo('./add')" size="mini" class="uni-button" type="primary">
-					新增
+					发布新题
 				</button>
 				<button class="uni-button" type="warn" size="mini" @click="delTable">
 					批量删除

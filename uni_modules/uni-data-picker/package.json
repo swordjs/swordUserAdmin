@@ -1,13 +1,15 @@
 {
-  "id": "uni-load-more",
-  "displayName": "uni-load-more 加载更多",
-  "version": "1.1.8",
-  "description": "LoadMore 组件，常用在列表里面，做滚动加载使用。",
+  "id": "uni-data-picker",
+  "displayName": "uni-data-picker 数据驱动的picker选择器",
+  "version": "0.3.5",
+  "description": "Picker选择器",
   "keywords": [
     "uni-ui",
     "uniui",
-    "加载更多",
-    "load-more"
+    "picker",
+    "级联",
+    "省市区",
+    ""
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
@@ -40,7 +42,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+      "uni-load-more"
+    ],
     "encrypt": [],
     "platforms": {
       "cloud": {
