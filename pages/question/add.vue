@@ -39,6 +39,7 @@
 </template>
 
 <script>
+	import callFunction from "../../common/callFunction.js"
 	export default {
 		data() {
 			return {
@@ -79,7 +80,7 @@
 						title: "提交中...",
 						mask: true
 					});
-					const addResult = await uniCloud.callFunction({
+					const addResult = await callFunction({
 						name: "application",
 						data: {
 						  route: `api/question`,

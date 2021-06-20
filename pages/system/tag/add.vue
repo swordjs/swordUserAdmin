@@ -12,10 +12,9 @@
 					<uni-easyinput v-model="formData.name" :clearable="false" placeholder="请输入标签名称" />
 				</uni-forms-item>
 				<!-- 选择专区 -->
-				<uni-forms-item name="area" label="选择专区" required>
+				<uni-forms-item name="areaID" label="选择专区" required>
 					<uni-data-picker style="width: 100%;" v-model="formData.areaID" preload placeholder="请选择专区"
-						popup-title="全部专区" collection="questionArea" field="_id as value, name as text"
-						@change="handleAreaPickerChange">
+						popup-title="全部专区" collection="questionArea" field="_id as value, name as text">
 					</uni-data-picker>
 				</uni-forms-item>
 				<view class="uni-button-group">
@@ -29,6 +28,7 @@
 </template>
 
 <script>
+	import callFunction from "../../../common/callFunction.js"
 	export default {
 		data() {
 			return {
@@ -39,7 +39,7 @@
 							errorMessage: '请输入标签名称',
 						}]
 					},
-					area: {
+					areaID: {
 						rules: [{
 							required: true,
 							errorMessage: '请选择专区',
@@ -60,7 +60,7 @@
 						title: "提交中...",
 						mask: true
 					});
-					const addResult = await uniCloud.callFunction({
+					const addResult = await callFunction({
 						name: "application",
 						data: {
 						  route: `api/questionTag`,

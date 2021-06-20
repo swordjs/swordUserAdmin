@@ -7,7 +7,7 @@
 			</view>
 		</view>
 		<view class="uni-container">
-			<uni-forms ref="form" :v-model="formData" validate-trigger="submit">
+			<uni-forms ref="form" :value="formData" :rules="rules" validate-trigger="submit">
 				<uni-forms-item labelWid="100" name="name" label="专区名称" required>
 					<uni-easyinput v-model="formData.name" :clearable="false" placeholder="请输入专区名称" />
 				</uni-forms-item>
@@ -25,9 +25,24 @@
 </template>
 
 <script>
+	import callFunction from "../../../common/callFunction.js"
 	export default {
 		data() {
 			return {
+				rules: {
+					name: {
+						rules: [{
+							required: true,
+							errorMessage: '请输入专区名称',
+						}]
+					},
+					icon: {
+						rules: [{
+							required: true,
+							errorMessage: '请上传图标',
+						}]
+					}
+				},
 				formData: {
 					name: "",
 					icon: []
@@ -36,17 +51,12 @@
 		},
 		methods: {
 			async submitForm() {
-				if (this.formData.name === "" || this.formData.icon.length === 0) {
-					uni.showToast({
-						title: "专区名称或者图标为空",
-						icon: "none"
-					});
-				} else {
+				this.$refs.form.submit().then(async res => {
 					uni.showLoading({
 						title: "提交中...",
 						mask: true
 					});
-					const addResult = await uniCloud.callFunction({
+					const addResult = await callFunction({
 						name: "application",
 						data: {
 							route: `api/questionArea`,
@@ -63,13 +73,14 @@
 							title: "添加成功",
 							icon: "none"
 						});
-					}else{
-						uni.showToast({
-							title: addResult.msg,
-							icon: "none"
-						});
 					}
-				}
+				}).catch(err => {
+					uni.showToast({
+						title: "表单信息填写不正确",
+						icon: "none"
+					})
+					console.log('表单错误信息：', err);
+				})
 			}
 		}
 	}
