@@ -45,7 +45,7 @@
 						<uni-td align="center">
 							{{item.name}}
 						</uni-td>
-						<uni-td align="center"> {{item.createDate}}</uni-td>
+						<uni-td align="center"> {{item.createDate | formatTime}} </uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
 								<button size="mini" @click="navigateTo('./edit?id=' + item._id, false)"
@@ -86,13 +86,10 @@
 	// 分页配置
 	const pageSize = 20;
 	const pageCurrent = 1;
-	import * as dayjs from "dayjs";
-	console.log(dayjs)
 
 	export default {
 		data() {
 			return {
-				dayjs,
 				query: "",
 				where: "",
 				orderby: dbOrderBy,

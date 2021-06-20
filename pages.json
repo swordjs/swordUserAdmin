@@ -128,7 +128,13 @@
 						"navigationBarTitleText": "专区列表"
 					}
 				},
-
+				{
+					"path": "questionArea/add",
+					"style": {
+						"navigationBarTitleText": "新增专区",
+						"enablePullDownRefresh": false
+					}
+				},
 				{
 					"path": "tag/list",
 					"style": {
@@ -140,6 +146,12 @@
 					"path": "question/list",
 					"style": {
 						"navigationBarTitleText": "审核题目"
+					}
+				}, {
+					"path": "tag/add",
+					"style": {
+						"navigationBarTitleText": "新增标签",
+						"enablePullDownRefresh": false
 					}
 				}
 			]

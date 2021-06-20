@@ -35,8 +35,7 @@
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>
 						<uni-th width="150" align="center">专区名称</uni-th>
-						<uni-th align="center">图片</uni-th>
-						<uni-th width="170" align="center">状态</uni-th>
+						<uni-th width="150" align="center">图片</uni-th>
 						<uni-th width="170" align="center">创建时间</uni-th>
 						<uni-th width="160" align="center">操作</uni-th>
 					</uni-tr>
@@ -46,8 +45,7 @@
 						<uni-td align="center">
 							<image style="width: 90rpx;height: 90rpx;" :src="item.iconPath" mode=""></image>
 						</uni-td>
-						<uni-td align="center">{{ item.state }}</uni-td>
-						<uni-td align="center"> {{item.createDate}}</uni-td>
+						<uni-td align="center"> {{item.createDate | formatTime}}</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
 								<button size="mini" @click="navigateTo('./edit?id=' + item._id, false)"
@@ -88,13 +86,9 @@
 	// 分页配置
 	const pageSize = 20;
 	const pageCurrent = 1;
-	import * as dayjs from "dayjs";
-	console.log(dayjs)
-
 	export default {
 		data() {
 			return {
-				dayjs,
 				query: "",
 				where: "",
 				orderby: dbOrderBy,
