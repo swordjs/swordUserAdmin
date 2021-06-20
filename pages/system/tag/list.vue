@@ -16,19 +16,12 @@
 				<button class="uni-button" type="warn" size="mini" @click="delTable">
 					批量删除
 				</button>
-				<!-- #ifdef H5 -->
-				<download-excel class="hide-on-phone" :fields="expExcel.json_fields" :data="expData"
-					:type="expExcel.type" :name="expExcel.filename">
-					<button class="uni-button" type="primary" size="mini">
-						导出 Excel
-					</button>
-				</download-excel>
-				<!-- #endif -->
+
 			</view>
 		</view>
 		<view class="uni-container">
-			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionTag,questionArea" :options="options" :where="where"
-				page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
+			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionTag,questionArea" :options="options"
+				:where="where" page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
 				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
 					@selection-change="selectionChange">
@@ -100,17 +93,6 @@
 				selectedIndexs: [], //批量选中的项
 				pageSizeIndex: 1,
 				pageSizeOption: [1, 20, 50, 100, 500],
-				expData: [],
-				expExcel: {
-					filename: "权限.xls",
-					type: "xls",
-					json_fields: {
-						权限标识: "permission_id",
-						权限名称: "permission_name",
-						备注: "comment",
-						创建时间: "create_date",
-					},
-				},
 			};
 		},
 		watch: {

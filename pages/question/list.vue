@@ -16,14 +16,6 @@
 				<button class="uni-button" type="warn" size="mini" @click="delTable">
 					批量删除
 				</button>
-				<!-- #ifdef H5 -->
-				<download-excel class="hide-on-phone" :fields="expExcel.json_fields" :data="expData"
-					:type="expExcel.type" :name="expExcel.filename">
-					<button class="uni-button" type="primary" size="mini">
-						导出 Excel
-					</button>
-				</download-excel>
-				<!-- #endif -->
 			</view>
 		</view>
 		<view class="uni-container">
@@ -114,18 +106,7 @@
 				selectedIndexs: [], //批量选中的项
 				pageSizeIndex: 1,
 				pageSizeOption: [1, 20, 50, 100, 500],
-				expData: [],
-				uid,
-				expExcel: {
-					filename: "权限.xls",
-					type: "xls",
-					json_fields: {
-						权限标识: "permission_id",
-						权限名称: "permission_name",
-						备注: "comment",
-						创建时间: "create_date",
-					},
-				},
+				uid
 			};
 		},
 		watch: {
