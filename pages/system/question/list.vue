@@ -88,7 +88,7 @@
 			<uni-td align="center">
               {{ item.content === "" ? "内容暂无" : item.content }}
             </uni-td>
-            <uni-td align="center"> {{ item.publishUserID[0].nickname }}</uni-td>
+            <uni-td align="center"> {{ item.publishUserID[0].nickname || "暂无昵称" }}</uni-td>
 			<uni-td align="center"> {{ item.createDate }}</uni-td>
             <uni-td align="center">
               <view class="uni-group">

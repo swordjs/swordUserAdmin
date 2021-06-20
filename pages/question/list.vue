@@ -34,7 +34,7 @@
 			</a-tabs>
 			<unicloud-db ref="dataQuery" @load="onqueryload" collection="question,questionTag,uni-id-users"
 				:options="options"
-				:where="(where !== '' ? where + '&&' : '') + `state == '${state}' && publishUserID == '${uid}'`"
+				:where="(where !== '' ? where + '&&' : '') + `state == '${state}' && publishUserID._id == '${uid}'`"
 				field="tagID{name},content,title,createDate,publishUserID{nickname}" page-data="replace"
 				:orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
 				v-slot:default="{ data, pagination, loading, error }">
@@ -45,7 +45,6 @@
 						<uni-th width="170" align="center">标签</uni-th>
 						<uni-th width="250" align="center">题目标题</uni-th>
 						<uni-th width="250" align="center">题目内容</uni-th>
-						<uni-th width="250" align="center">发布者</uni-th>
 						<uni-th width="170" align="center">创建时间</uni-th>
 						<uni-th width="160" align="center">操作</uni-th>
 					</uni-tr>
@@ -58,7 +57,6 @@
 						<uni-td align="center">
 							{{ item.content === "" ? "内容暂无" : item.content }}
 						</uni-td>
-						<uni-td align="center"> {{ item.publishUserID[0].nickname }}</uni-td>
 						<uni-td align="center"> {{ item.createDate }}</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
