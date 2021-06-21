@@ -38,7 +38,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/article/list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{

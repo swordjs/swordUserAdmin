@@ -16,18 +16,9 @@
         <button class="uni-button" type="default" size="mini" @click="search">
           搜索
         </button>
-        <button
-          @click="navigateTo('./add')"
-          size="mini"
-          class="uni-button"
-          type="primary"
-        >
-          新增
-        </button>
         <button class="uni-button" type="warn" size="mini" @click="delTable">
           批量删除
         </button>
-        
       </view>
     </view>
     <view class="uni-container">
