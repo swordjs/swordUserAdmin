@@ -37,17 +37,22 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/article/list",
+			"style": {
+				"navigationBarTitleText": "文章列表",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/article/add",
+			"style": {
+				"navigationBarTitleText": "发布文章",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/article/list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
