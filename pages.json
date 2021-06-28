@@ -167,8 +167,23 @@
 						"navigationBarTitleText": "新增标签",
 						"enablePullDownRefresh": false
 					}
+				}, {
+					"path": "article/list",
+					"style": {
+						"navigationBarTitleText": "文章列表",
+						"enablePullDownRefresh": false
+					}
 				}
-			]
+			    ,{
+                    "path" : "article/detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "文章详情",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 		},
 		{
 			"root": "pages/demo",

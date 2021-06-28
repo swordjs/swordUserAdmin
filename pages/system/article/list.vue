@@ -10,9 +10,6 @@
 				<button class="uni-button" type="default" size="mini" @click="search">
 					搜索
 				</button>
-				<button @click="navigateTo('./add')" size="mini" class="uni-button" type="primary">
-					发布新文章
-				</button>
 				<button class="uni-button" type="warn" size="mini" @click="delTable">
 					批量删除
 				</button>
@@ -26,7 +23,7 @@
 			</a-tabs>
 			<unicloud-db ref="dataQuery" @load="onqueryload" collection="article,questionTag,uni-id-users"
 				:options="options" field="title,content,tagID{name},userID{nickname},createDate"
-				:where="(where !== '' ? where + '&&' : '') + `state == '${state}' && userID._id == '${uid}'`"
+				:where="(where !== '' ? where + '&&' : '') + `state == '${state}'`"
 				page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
 				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
@@ -48,15 +45,12 @@
 						<uni-td align="center">
 							<div class="articleContent">{{ item.content === "" ? "内容暂无" : item.content }}</div>
 						</uni-td>
-						<uni-td align="center"> {{ item.createDate }}</uni-td>
+						<uni-td align="center"> {{ item.createDate | formatTime }}</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
-								<button size="mini" @click="navigateTo('./edit?id=' + item._id, false)"
+								<button size="mini" @click="navigateTo('./detail?id=' + item._id, false)"
 									class="uni-button" type="primary">
-									修改
-								</button>
-								<button size="mini" @click="confirmDelete(item._id)" class="uni-button" type="warn">
-									删除
+									查看详情
 								</button>
 							</view>
 						</uni-td>
@@ -89,7 +83,6 @@
 	// 分页配置
 	const pageSize = 20;
 	const pageCurrent = 1;
-	const uid = uni.getStorageSync("uid");
 
 	export default {
 		data() {
@@ -105,7 +98,6 @@
 				selectedIndexs: [], //批量选中的项
 				pageSizeIndex: 1,
 				pageSizeOption: [1, 20, 50, 100, 500],
-				uid
 			};
 		},
 		watch: {
