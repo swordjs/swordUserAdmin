@@ -51,7 +51,7 @@
 						<uni-td align="center"> {{ item.createDate }}</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
-								<button size="mini" @click="navigateTo('./edit?id=' + item._id, false)"
+								<button size="mini" @click="navigateTo('./detail?id=' + item._id, false)"
 									class="uni-button" type="primary">
 									修改
 								</button>

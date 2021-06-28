@@ -51,6 +51,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		},{
+			"path": "pages/article/detail",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"subPackages": [{
