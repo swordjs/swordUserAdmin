@@ -22,4 +22,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
-uni_modules/uni-id/uniCloud/cloudfunctions/common/uni-id/config.json
+uniCloud-aliyun/cloudfunctions/common/uni-id/config.json
+uniCloud-aliyun/cloudfunctions/common/uni-config-center/uni-id/config.json
