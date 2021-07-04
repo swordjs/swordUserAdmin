@@ -36,10 +36,10 @@
 					<view v-for="link in links" :key="link.url" class="menu-item">
 						<uni-link :href="link.url" :text="link.text" color="#666" fontSize="13" style="font-size:12px;" />
 					</view>
-					<template v-if="userInfo.username">
+					<template v-if="userInfo.nickname">
 						<view class="menu-item username">
 							<uni-icons class="person" type="person" color="#666" size="13"></uni-icons>
-							<text>{{userInfo.username}}</text>
+							<text>{{userInfo.nickname}}</text>
 						</view>
 						<view class="menu-item" @click="chagePassword">
 							<text>修改密码</text>

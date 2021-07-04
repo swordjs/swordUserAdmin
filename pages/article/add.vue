@@ -98,7 +98,10 @@
 							data: {
 								route: `api/article`,
 								method: "POST",
-								params: this.formData,
+								params: {
+									...this.formData,
+									desc: this.formData.content.substring(0, 100)
+								},
 							},
 						});
 						uni.hideLoading();

@@ -163,27 +163,29 @@ exports.main = async (event, context) => {
 			}
 
 			let passed = false;
-			let needCaptcha = await getNeedCaptcha();
-			console.log('needCaptcha', needCaptcha);
-			if (needCaptcha) {
-				console.log(6666, params);
-				res = await uniCaptcha.verify({
-					...params,
-					scene: 'login'
-				})
-				if (res.code === 0) passed = true;
-			}
+			res = await uniID.login({
+				...params,
+				queryField: ['username', 'email', 'mobile']
+			});
+			// let needCaptcha = await getNeedCaptcha();
+			// if (needCaptcha) {
+			// 	res = await uniCaptcha.verify({
+			// 		...params,
+			// 		scene: 'login'
+			// 	})
+			// 	if (res.code === 0) passed = true;
+			// }
 
-			if (!needCaptcha || passed) {
-				res = await uniID.login({
-					...params,
-					queryField: ['username', 'email', 'mobile']
-				});
-				await loginLog(res);
-				needCaptcha = await getNeedCaptcha();
-			}
+			// if (!needCaptcha || passed) {
+			// 	res = await uniID.login({
+			// 		...params,
+			// 		queryField: ['username', 'email', 'mobile']
+			// 	});
+			// 	await loginLog(res);
+			// 	needCaptcha = await getNeedCaptcha();
+			// }
 
-			res.needCaptcha = needCaptcha;
+			// res.needCaptcha = needCaptcha;
 			break;
 		case 'login_by_weixin':
 			res = await uniID.loginByWeixin({...params});
@@ -285,7 +287,6 @@ exports.main = async (event, context) => {
 				}
 			}
 			let loginBySmsRes = await uniID.loginBySms(params)
-			console.log(loginBySmsRes);
 			if (loginBySmsRes.code === 0) {
 				res = await uniID.resetPwd({
 					password: params.password,

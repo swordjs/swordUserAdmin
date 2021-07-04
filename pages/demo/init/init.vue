@@ -107,7 +107,7 @@
 				this.$refs.passwordInput.$refs.input.blur()
 				// #endif
 				this.loading = true
-				this.$request('user/register', formData)
+				this.$request('register', formData)
 					.then(res => {
 						uni.showModal({
 							title: '提示',
