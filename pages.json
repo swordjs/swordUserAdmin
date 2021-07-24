@@ -183,6 +183,13 @@
 						"enablePullDownRefresh": false
 					}
 				}, {
+					"path": "tag/edit",
+					"style": {
+						"navigationBarTitleText": "修改标签",
+						"enablePullDownRefresh": false
+					}
+
+				}, {
 					"path": "article/list",
 					"style": {
 						"navigationBarTitleText": "文章列表",
