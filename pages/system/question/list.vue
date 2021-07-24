@@ -6,12 +6,9 @@
 				<view class="uni-sub-title"></view>
 			</view>
 			<view class="uni-group">
-				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="专区名称" />
+				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="题目标题" />
 				<button class="uni-button" type="default" size="mini" @click="search">
 					搜索
-				</button>
-				<button class="uni-button" type="warn" size="mini" @click="delTable">
-					批量删除
 				</button>
 			</view>
 		</view>
@@ -26,8 +23,7 @@
 				field="tagID{name},content,title,examineInfo,createDate,publishUserID{nickname}" page-data="replace"
 				:orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
 				v-slot:default="{ data, pagination, loading, error }">
-				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
-					@selection-change="selectionChange">
+				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe>
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>
 						<uni-th width="170" align="center">标签</uni-th>
@@ -90,7 +86,7 @@
 	const db = uniCloud.database();
 	// 表查询配置
 	const dbOrderBy = "create_date desc";
-	const dbSearchFields = ["name"]; // 支持模糊搜索的字段列表
+	const dbSearchFields = ["title"]; // 支持模糊搜索的字段列表
 	// 分页配置
 	const pageSize = 20;
 	const pageCurrent = 1;
@@ -168,18 +164,6 @@
 						},
 					},
 				});
-			},
-			// 多选处理
-			selectedItems() {
-				var dataList = this.$refs.dataQuery.dataList;
-				return this.selectedIndexs.map((i) => dataList[i].permission_id);
-			},
-			// 多选
-			selectionChange(e) {
-				this.selectedIndexs = e.detail.index;
-			},
-			confirmAudit(id) {
-
 			},
 			handleStateChange(type) {
 				this.state = type;

@@ -6,7 +6,7 @@
 				<view class="uni-sub-title"></view>
 			</view>
 			<view class="uni-group">
-				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="专区名称" />
+				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="文章标题" />
 				<button class="uni-button" type="default" size="mini" @click="search">
 					搜索
 				</button>
@@ -20,9 +20,9 @@
 			</a-tabs>
 			<unicloud-db ref="dataQuery" @load="onqueryload" collection="article,questionTag,uni-id-users"
 				:options="options" field="title,content,tagID{name},userID{nickname},createDate"
-				:where="(where !== '' ? where + '&&' : '') + `state == '${state}'`"
-				page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
-				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
+				:where="(where !== '' ? where + '&&' : '') + `state == '${state}'`" page-data="replace"
+				:orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
+				v-slot:default="{ data, pagination, loading, error }">
 				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe>
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>

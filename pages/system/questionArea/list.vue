@@ -13,9 +13,6 @@
 				<button @click="navigateTo('./add')" size="mini" class="uni-button" type="primary">
 					新增
 				</button>
-				<button class="uni-button" type="warn" size="mini" @click="delTable">
-					批量删除
-				</button>
 			</view>
 		</view>
 		<view class="uni-container">
@@ -24,8 +21,7 @@
 				deleteDate: ''
 			}" page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
-				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
-					@selection-change="selectionChange">
+				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe>
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>
 						<uni-th width="150" align="center">专区名称</uni-th>
@@ -154,25 +150,6 @@
 						},
 					},
 				});
-			},
-			// 多选处理
-			selectedItems() {
-				var dataList = this.$refs.dataQuery.dataList;
-				return this.selectedIndexs.map((i) => dataList[i].permission_id);
-			},
-			//批量删除
-			delTable() {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除多条记录？",
-					success: (res) => {
-						res.confirm && this.delete(this.selectedItems());
-					},
-				});
-			},
-			// 多选
-			selectionChange(e) {
-				this.selectedIndexs = e.detail.index;
 			},
 			confirmDelete(id) {
 				uni.showModal({

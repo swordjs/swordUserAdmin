@@ -42,7 +42,7 @@
 </template>
 
 <script>
-	import callFunction from "../../../common/callFunction.js"
+	import callFunction from "../../common/callFunction.js"
 	export default {
 		onLoad(e) {
 			this.formData.id = e.id;

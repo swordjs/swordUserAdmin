@@ -6,15 +6,12 @@
 				<view class="uni-sub-title"></view>
 			</view>
 			<view class="uni-group">
-				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="专区名称" />
+				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="题目名称" />
 				<button class="uni-button" type="default" size="mini" @click="search">
 					搜索
 				</button>
 				<button @click="navigateTo('./add')" size="mini" class="uni-button" type="primary">
 					发布新题
-				</button>
-				<button class="uni-button" type="warn" size="mini" @click="delTable">
-					批量删除
 				</button>
 			</view>
 		</view>
@@ -30,15 +27,14 @@
 				field="tagID{name},content,title,createDate,publishUserID{nickname}" page-data="replace"
 				:orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
 				v-slot:default="{ data, pagination, loading, error }">
-				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
-					@selection-change="selectionChange">
+				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe>
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>
 						<uni-th width="170" align="center">标签</uni-th>
 						<uni-th width="250" align="center">题目标题</uni-th>
 						<uni-th width="250" align="center">题目内容</uni-th>
 						<uni-th width="170" align="center">创建时间</uni-th>
-						<uni-th width="160" align="center">操作</uni-th>
+						<uni-th width="160" align="center" v-if="state === 'onlist'">操作</uni-th>
 					</uni-tr>
 					<uni-tr v-for="(item, index) in data" :key="index">
 						<uni-td align="center">{{ item._id }}</uni-td>
@@ -50,14 +46,11 @@
 							{{ item.content === "" ? "内容暂无" : item.content }}
 						</uni-td>
 						<uni-td align="center"> {{ item.createDate }}</uni-td>
-						<uni-td align="center">
+						<uni-td align="center" v-if="state === 'onlist'">
 							<view class="uni-group">
 								<button size="mini" @click="navigateTo('./edit?id=' + item._id, false)"
 									class="uni-button" type="primary">
 									修改
-								</button>
-								<button size="mini" @click="confirmDelete(item._id)" class="uni-button" type="warn">
-									删除
 								</button>
 							</view>
 						</uni-td>
@@ -86,7 +79,7 @@
 	const db = uniCloud.database();
 	// 表查询配置
 	const dbOrderBy = "create_date desc";
-	const dbSearchFields = ["name"]; // 支持模糊搜索的字段列表
+	const dbSearchFields = ["title"]; // 支持模糊搜索的字段列表
 	// 分页配置
 	const pageSize = 20;
 	const pageCurrent = 1;
@@ -166,57 +159,6 @@
 						},
 					},
 				});
-			},
-			// 多选处理
-			selectedItems() {
-				var dataList = this.$refs.dataQuery.dataList;
-				return this.selectedIndexs.map((i) => dataList[i].permission_id);
-			},
-			//批量删除
-			delTable() {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除多条记录？",
-					success: (res) => {
-						res.confirm && this.delete(this.selectedItems());
-					},
-				});
-			},
-			// 多选
-			selectionChange(e) {
-				this.selectedIndexs = e.detail.index;
-			},
-			confirmDelete(id) {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除该记录？",
-					success: (res) => {
-						res.confirm && this.delete(id);
-					},
-				});
-			},
-			async delete(id) {
-				uni.showLoading({
-					mask: true,
-				});
-				await this.$request("system/permission/remove", {
-						id,
-					})
-					.then((res) => {
-						uni.showToast({
-							title: "删除成功",
-						});
-					})
-					.catch((err) => {
-						uni.showModal({
-							content: err.message || "请求服务失败",
-							showCancel: false,
-						});
-					})
-					.finally((err) => {
-						uni.hideLoading();
-					});
-				this.loadData(false);
 			},
 			handleStateChange(type) {
 				this.state = type;

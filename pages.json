@@ -59,7 +59,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/question/edit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
