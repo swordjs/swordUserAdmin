@@ -10,9 +10,6 @@
 				<button class="uni-button" type="default" size="mini" @click="search">
 					搜索
 				</button>
-				<button class="uni-button" type="warn" size="mini" @click="delTable">
-					批量删除
-				</button>
 			</view>
 		</view>
 		<view class="uni-container">
@@ -26,8 +23,7 @@
 				:where="(where !== '' ? where + '&&' : '') + `state == '${state}'`"
 				page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
-				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
-					@selection-change="selectionChange">
+				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe>
 					<uni-tr>
 						<uni-th width="250" align="center">id</uni-th>
 						<uni-th width="170" align="center">标签</uni-th>
@@ -162,52 +158,6 @@
 			selectedItems() {
 				var dataList = this.$refs.dataQuery.dataList;
 				return this.selectedIndexs.map((i) => dataList[i].permission_id);
-			},
-			//批量删除
-			delTable() {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除多条记录？",
-					success: (res) => {
-						res.confirm && this.delete(this.selectedItems());
-					},
-				});
-			},
-			// 多选
-			selectionChange(e) {
-				this.selectedIndexs = e.detail.index;
-			},
-			confirmDelete(id) {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除该记录？",
-					success: (res) => {
-						res.confirm && this.delete(id);
-					},
-				});
-			},
-			async delete(id) {
-				uni.showLoading({
-					mask: true,
-				});
-				await this.$request("system/permission/remove", {
-						id,
-					})
-					.then((res) => {
-						uni.showToast({
-							title: "删除成功",
-						});
-					})
-					.catch((err) => {
-						uni.showModal({
-							content: err.message || "请求服务失败",
-							showCancel: false,
-						});
-					})
-					.finally((err) => {
-						uni.hideLoading();
-					});
-				this.loadData(false);
 			},
 			handleStateChange(type) {
 				this.state = type;
