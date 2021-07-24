@@ -1,6 +1,6 @@
 {
-  "name": "uniCloud-admin",
-  "id": "uni-template-admin",
+  "name": "剑指题解-专门为互联网人打造的题解神器-小程序管理后台",
+  "id": "5404",
   "displayName": "uniCloud admin 基础框架",
   "version": "1.4.5",
   "description": "基于 uni-app，uniCloud 的 admin 管理项目模板",

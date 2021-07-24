@@ -177,6 +177,18 @@
 						"navigationBarTitleText": "审核题目"
 					}
 				}, {
+					"path": "question/edit",
+					"style": {
+						"navigationBarTitleText": "审核题目"
+					}
+				}, {
+					"path": "question/audit",
+					"style": {
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
+
+				}, {
 					"path": "tag/add",
 					"style": {
 						"navigationBarTitleText": "新增标签",

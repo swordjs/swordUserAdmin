@@ -23,7 +23,7 @@
 			</a-tabs>
 			<unicloud-db ref="dataQuery" @load="onqueryload" collection="question,questionTag,uni-id-users"
 				:options="options" :where="(where !== '' ? where + '&&' : '') + `state == '${state}'`"
-				field="tagID{name},content,title,createDate,publishUserID{nickname}" page-data="replace"
+				field="tagID{name},content,title,examineInfo,createDate,publishUserID{nickname}" page-data="replace"
 				:orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
 				v-slot:default="{ data, pagination, loading, error }">
 				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
@@ -33,6 +33,7 @@
 						<uni-th width="170" align="center">标签</uni-th>
 						<uni-th width="250" align="center">题目标题</uni-th>
 						<uni-th width="250" align="center">题目内容</uni-th>
+						<uni-th width="250" align="center" v-if="state === 'reject'">拒绝原因</uni-th>
 						<uni-th width="250" align="center">发布者</uni-th>
 						<uni-th width="170" align="center">创建时间</uni-th>
 						<uni-th width="160" align="center">操作</uni-th>
@@ -46,17 +47,21 @@
 						<uni-td align="center">
 							{{ item.content === "" ? "内容暂无" : item.content }}
 						</uni-td>
+						<uni-td align="center" v-if="state === 'reject'">
+							{{item.examineInfo ? item.examineInfo.reason : "暂无原因"}}
+						</uni-td>
 						<uni-td align="center"> {{ item.publishUserID[0] ? item.publishUserID[0].nickname : "暂无昵称" }}
 						</uni-td>
-						<uni-td align="center"> {{ item.createDate }}</uni-td>
+						<uni-td align="center"> {{ item.createDate | formatTime }}</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
 								<button size="mini" @click="navigateTo('./edit?id=' + item._id, false)"
-									class="uni-button" type="primary">
+									class="uni-button">
 									修改
 								</button>
-								<button size="mini" @click="confirmDelete(item._id)" class="uni-button" type="warn">
-									删除
+								<button size="mini" @click="navigateTo('./audit?id=' + item._id, false)"
+									class="uni-button" type="primary">
+									审核
 								</button>
 							</view>
 						</uni-td>
@@ -169,51 +174,12 @@
 				var dataList = this.$refs.dataQuery.dataList;
 				return this.selectedIndexs.map((i) => dataList[i].permission_id);
 			},
-			//批量删除
-			delTable() {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除多条记录？",
-					success: (res) => {
-						res.confirm && this.delete(this.selectedItems());
-					},
-				});
-			},
 			// 多选
 			selectionChange(e) {
 				this.selectedIndexs = e.detail.index;
 			},
-			confirmDelete(id) {
-				uni.showModal({
-					title: "提示",
-					content: "确认删除该记录？",
-					success: (res) => {
-						res.confirm && this.delete(id);
-					},
-				});
-			},
-			async delete(id) {
-				uni.showLoading({
-					mask: true,
-				});
-				await this.$request("system/permission/remove", {
-						id,
-					})
-					.then((res) => {
-						uni.showToast({
-							title: "删除成功",
-						});
-					})
-					.catch((err) => {
-						uni.showModal({
-							content: err.message || "请求服务失败",
-							showCancel: false,
-						});
-					})
-					.finally((err) => {
-						uni.hideLoading();
-					});
-				this.loadData(false);
+			confirmAudit(id) {
+
 			},
 			handleStateChange(type) {
 				this.state = type;
