@@ -53,7 +53,7 @@
         collection="uni-id-users,uni-id-roles"
         :options="options"
         :where="where"
-        field="_id,username,role{role_id,role_name},mobile,email,status,register_date"
+        field="_id,nickname,role{role_id,role_name},mobile,sign,email,status,register_date"
         page-data="replace"
         :orderby="orderby"
         :getcount="true"
@@ -73,16 +73,16 @@
             <uni-th align="center">用户名</uni-th>
             <uni-th align="center">角色</uni-th>
             <uni-th align="center">手机号</uni-th>
-            <uni-th align="center">邮箱</uni-th>
+            <uni-th align="center">签名</uni-th>
             <uni-th align="center">用户状态</uni-th>
             <uni-th width="170" align="center">创建时间</uni-th>
             <uni-th width="204" align="center">操作</uni-th>
           </uni-tr>
           <uni-tr v-for="(item, index) in data" :key="index">
-            <uni-td align="center">{{ item.username }}</uni-td>
+            <uni-td align="center">{{ item.nickname }}</uni-td>
             <uni-td align="center">{{ item.role }}</uni-td>
-            <uni-td align="center">{{ item.mobile }}</uni-td>
-            <uni-td align="center">{{ item.email }}</uni-td>
+            <uni-td align="center">{{ item.mobile || "暂无绑定手机" }}</uni-td>
+            <uni-td align="center">{{ item.sign }}</uni-td>
             <uni-td align="center">{{ item.status }}</uni-td>
             <uni-td align="center">{{ item.register_date }}</uni-td>
             <uni-td align="center">

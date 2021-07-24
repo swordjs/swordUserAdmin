@@ -1,8 +1,8 @@
 <template>
 	<view class="uni-container">
 		<uni-forms ref="form" v-model="formData" :rules="rules" validateTrigger="bind" @submit="submit">
-			<uni-forms-item name="username" label="用户名" required>
-				<uni-easyinput v-model="formData.username" :clearable="false" placeholder="请输入用户名" />
+			<uni-forms-item name="username" label="昵称" required>
+				<uni-easyinput v-model="formData.nickname" :clearable="false" placeholder="请输入用户名" />
 			</uni-forms-item>
 			<uni-forms-item :name="showPassword ? 'password' : ''" label="重置密码">
 				<span v-show="!showPassword" class="reset-password-btn" @click="trigger">点击重置密码</span>
@@ -53,7 +53,7 @@
 			return {
 				showPassword: false,
 				formData: {
-					"username": "",
+					"nickname": "",
 					"password": "",
 					"role": [],
 					"mobile": "",
@@ -61,7 +61,7 @@
 					"status": false //默认禁用
 				},
 				rules: {
-					...getValidator(["username", "password", "role", "mobile", "email"]),
+					...getValidator(["nickname", "password", "role", "mobile", "email"]),
 					"status": {
 						"rules": [{
 							"format": "bool"

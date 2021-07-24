@@ -19,8 +19,10 @@
 			</view>
 		</view>
 		<view class="uni-container">
-			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionArea" :options="options" :where="where"
-				page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
+			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionArea" :options="options" :where="{
+				...where,
+				deleteDate: ''
+			}" page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error }">
 				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
 					@selection-change="selectionChange">
@@ -71,6 +73,8 @@
 </template>
 
 <script>
+	import callFunction from "../../../common/callFunction.js"
+
 	const db = uniCloud.database();
 	// 表查询配置
 	const dbOrderBy = "create_date desc";
@@ -183,23 +187,22 @@
 				uni.showLoading({
 					mask: true,
 				});
-				await this.$request("system/permission/remove", {
-						id,
-					})
-					.then((res) => {
-						uni.showToast({
-							title: "删除成功",
-						});
-					})
-					.catch((err) => {
-						uni.showModal({
-							content: err.message || "请求服务失败",
-							showCancel: false,
-						});
-					})
-					.finally((err) => {
-						uni.hideLoading();
+				const removeResult = await callFunction({
+					name: "application",
+					data: {
+						route: `api/questionArea`,
+						method: "DELETE",
+						params: {
+							_id: id
+						},
+					},
+				});
+				uni.hideLoading();
+				if (removeResult.success) {
+					uni.showToast({
+						title: "删除成功",
 					});
+				}
 				this.loadData(false);
 			},
 		},

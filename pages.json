@@ -51,7 +51,7 @@
 				"enablePullDownRefresh": false
 			}
 
-		},{
+		}, {
 			"path": "pages/article/detail",
 			"style": {
 				"navigationBarTitleText": "文章详情",
@@ -157,6 +157,14 @@
 					}
 				},
 				{
+					"path": "questionArea/edit",
+					"style": {
+						"navigationBarTitleText": "修改专区",
+						"enablePullDownRefresh": false
+					}
+
+				},
+				{
 					"path": "tag/list",
 					"style": {
 						"navigationBarTitleText": "专区标签"
@@ -180,17 +188,16 @@
 						"navigationBarTitleText": "文章列表",
 						"enablePullDownRefresh": false
 					}
+				}, {
+					"path": "article/detail",
+					"style": {
+						"navigationBarTitleText": "文章详情",
+						"enablePullDownRefresh": false
+					}
+
 				}
-			    ,{
-                    "path" : "article/detail",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "文章详情",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+
+			]
 		},
 		{
 			"root": "pages/demo",
