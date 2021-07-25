@@ -1,21 +1,19 @@
 {
   "name": "剑指题解-专门为互联网人打造的题解神器-小程序管理后台",
-  "id": "5404",
-  "displayName": "uniCloud admin 基础框架",
+  "id": "sword-code-practice-admin",
+  "displayName": "剑指题解-专门为互联网人打造的题解神器-小程序管理后台",
   "version": "1.4.5",
-  "description": "基于 uni-app，uniCloud 的 admin 管理项目模板",
+  "description": "互联网人题解神器，神器在手，offer我有 随手刷题 | 无广告绿色免费 | 个性推荐",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "https://github.com/dcloudio/uni-template-admin.git",
   "keywords": [
-    "admin",
-    "uniCloud",
-    "管理后台",
-    "云后台",
-    "uni-admin"
-  ],
+    "剑指题解",
+    "后台",
+    "管理系统"
+],
   "engines": {
     "HBuilderX": "^3.1.1"
   },
@@ -45,7 +43,7 @@
       }
     },
     "contact": {
-      "qq": ""
+      "qq": "1018715564"
     },
     "declaration": {
       "ads": "无",
