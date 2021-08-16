@@ -58,17 +58,15 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/question/edit",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/question/edit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
@@ -223,8 +221,13 @@
 						"enablePullDownRefresh": false
 					}
 
+				}, {
+					"path": "openApi/list",
+					"style": {
+						"navigationBarTitleText": "开放api列表",
+						"enablePullDownRefresh": false
+					}
 				}
-
 			]
 		},
 		{
