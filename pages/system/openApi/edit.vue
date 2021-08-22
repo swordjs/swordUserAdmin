@@ -10,20 +10,20 @@
 			<!-- 这里新增info -->
 			<uni-forms-item name="info">
 				<view class="info-item">
-					<uni-easyinput placeholder="请输入api对应的云函数名称" v-model="formData.info.name" />
+					<uni-easyinput placeholder="请输入api对应的云函数名称" v-model="formData.info.url.name" />
 				</view>
 				<view class="info-item">
-					<uni-easyinput placeholder="请输入云函数对应的路由" v-model="formData.info.route" />
+					<uni-easyinput placeholder="请输入云函数对应的路由" v-model="formData.info.url.route" />
 				</view>
 				<view class="info-item">
 					<uni-data-picker placeholder="请输入请求方式, GET/POST/PUT/DELETE"
 						:localdata='[{text: "GET", value: "GET" }, { text: "POST" , value: "POST" },{ text: "PUT" , value: "PUT" },{ text: "DELETE" , value: "DELETE" }]'
-						v-model="formData.info.method"></uni-data-picker>
+						v-model="formData.info.url.method"></uni-data-picker>
 				</view>
 				<!-- 参数列表 -->
 				<view class="params-list">
 					<view class="params-list-item" v-for="(item, index) in paramOptions" :key="index">
-						<uni-easyinput placeholder="key键名" v-model="item.name" />
+						<uni-easyinput placeholder="key键名" v-model="item.key" />
 						<view class="required">
 							<uni-data-checkbox v-model="item.required"
 								:localdata="[{text: ' 必填', value: 1 }, { text: '非必填' , value: 0 }]" :multiple="false">
@@ -63,9 +63,11 @@
 					name: "",
 					remark: "",
 					info: {
-						name: "",
-						route: "",
-						method: ""
+						url: {
+							name: "",
+							route: "",
+							method: ""
+						}
 					}
 				},
 				paramOptions: [],
@@ -79,7 +81,7 @@
 		methods: {
 			handleAddParamOption() {
 				this.paramOptions.push({
-					name: "",
+					key: "",
 					required: 1
 				})
 			},
@@ -94,8 +96,8 @@
 						icon: "none"
 					})
 					return;
-				} else if (this.formData.info.name === "" || this.formData.info.route === "" || this.formData.info
-					.method === "") {
+				} else if (this.formData.info.url.name === "" || this.formData.info.url.route === "" || this.formData.info
+					.url.method === "") {
 					uni.showToast({
 						title: "请输入url信息(云函数名称，路由，请求方法)",
 						icon: "none"
@@ -106,7 +108,7 @@
 				if (this.paramOptions.length > 0) {
 					for (let key in this.paramOptions) {
 						let e = this.paramOptions[key];
-						if (e.name === "") {
+						if (e.key === "") {
 							uni.showToast({
 								title: `您的第${Number(key) + 1}个参数的key未填写`,
 								icon: "none"
@@ -143,7 +145,7 @@
 								...this.formData,
 								info: {
 									url: {
-										...this.formData.info,
+										...this.formData.info.url,
 										params: _paramOptions
 									}
 								}
@@ -177,10 +179,8 @@
 									required: Number(p.required)
 								}
 							})
-							this.formData = {
-								...data,
-								info: data.info.url
-							}
+							console.log(data)
+							this.formData = data;
 						}
 					}).catch((err) => {
 						uni.showModal({
