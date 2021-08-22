@@ -9,8 +9,6 @@
 				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="请输入搜索内容" />
 				<button class="uni-button" type="default" size="mini" @click="search">搜索</button>
 				<button class="uni-button" type="default" size="mini" @click="navigateTo('./add')">新增</button>
-				<button class="uni-button" type="default" size="mini" :disabled="!selectedIndexs.length"
-					@click="delTable">批量删除</button>
 			</view>
 		</view>
 		<view class="uni-container">
@@ -27,19 +25,26 @@
 						<uni-th align="center">详情</uni-th>
 						<uni-th align="center">创建时间</uni-th>
 						<uni-th align="center">修改时间</uni-th>
-						<uni-th align="center">删除时间</uni-th>
 						<uni-th width="204" align="center">操作</uni-th>
 					</uni-tr>
 					<uni-tr v-for="(item,index) in data" :key="index">
 						<uni-td align="center">{{ item.name }}</uni-td>
 						<uni-td align="center">{{ item.remark }}</uni-td>
-						<uni-td align="center">{{ item.state }}</uni-td>
+						<!-- 这里展示状态列表 -->
+						<uni-td align="center">
+							<uni-data-checkbox style="display: flex;justify-content: center;"
+								@change="handleStateChange($event, item._id)" v-model="item.state"
+								:localdata='[{text: " 开启", value: "open" }, { text: "关闭" , value: "close" }]'
+								:multiple="false">
+							</uni-data-checkbox>
+						</uni-td>
 						<!-- 这里展示详情信息 -->
 						<uni-td align="center">
 							云函数名称: {{item.info.url.name}}<br>
 							云函数路由: {{item.info.url.route}}<br>
 							云函数请求方式: {{item.info.url.method}}<br>
-							云函数必传参数: {{item.info.url.params.map(p => `${p.key}(${p.required ? '必传' : '非必传'})`).join(",")}}<br>
+							云函数必传参数:
+							{{item.info.url.params.map(p => `${p.key}(${p.required ? '必传' : '非必传'})`).join(",")}}<br>
 						</uni-td>
 						<uni-td align="center">
 							<uni-dateformat :date="item.createDate" :threshold="[0, 0]" />
@@ -48,14 +53,9 @@
 							<uni-dateformat :date="item.updateDate" :threshold="[0, 0]" />
 						</uni-td>
 						<uni-td align="center">
-							<uni-dateformat :date="item.deleteDate" :threshold="[0, 0]" />
-						</uni-td>
-						<uni-td align="center">
 							<view class="uni-group">
 								<button @click="navigateTo('./edit?id=' + item._id, false)" class="uni-button"
 									size="mini" type="primary">修改</button>
-								<button @click="confirmDelete(item._id)" class="uni-button" size="mini"
-									type="warn">删除</button>
 							</view>
 						</uni-td>
 					</uni-tr>
@@ -70,6 +70,8 @@
 </template>
 
 <script>
+	import callFunction from "../../../common/callFunction.js"
+
 	import {
 		enumConverter
 	} from '../../../js_sdk/validator/openApi.js';
@@ -77,7 +79,7 @@
 	const db = uniCloud.database()
 	// 表查询配置
 	const dbOrderBy = '' // 排序字段
-	const dbSearchFields = [] // 模糊搜索字段，支持模糊搜索的字段列表
+	const dbSearchFields = ["name", "remark"] // 模糊搜索字段，支持模糊搜索的字段列表
 	// 分页配置
 	const pageSize = 20
 	const pageCurrent = 1
@@ -101,6 +103,30 @@
 			}
 		},
 		methods: {
+			async handleStateChange(e, id) {
+				uni.showLoading({
+					title: "更改状态中...",
+					mask: true
+				});
+				const result = await callFunction({
+					name: "application",
+					data: {
+						route: `api/openApi/toggleOpenApiState`,
+						method: "POST",
+						params: {
+							id,
+							state: e.detail.value
+						},
+					},
+				});
+				uni.hideLoading();
+				if (result.success) {
+					uni.showToast({
+						title: "更改状态成功",
+						icon: "none"
+					});
+				}
+			},
 			getWhere() {
 				const query = this.query.trim()
 				if (!query) {
@@ -138,24 +164,9 @@
 					}
 				})
 			},
-			// 多选处理
-			selectedItems() {
-				var dataList = this.$refs.udb.dataList
-				return this.selectedIndexs.map(i => dataList[i]._id)
-			},
-			// 批量删除
-			delTable() {
-				this.$refs.udb.remove(this.selectedItems())
-			},
-			// 多选
-			selectionChange(e) {
-				this.selectedIndexs = e.detail.index
-			},
-			confirmDelete(id) {
-				this.$refs.udb.remove(id)
-			}
 		}
 	}
 </script>
-<style>
+<style scoped>
+
 </style>
