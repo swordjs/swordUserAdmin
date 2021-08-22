@@ -32,27 +32,6 @@ const validator = {
       }
     ]
   },
-  "createDate": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ]
-  },
-  "updateDate": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ]
-  },
-  "deleteDate": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ]
-  }
 }
 
 const enumConverter = {}
