@@ -49,7 +49,7 @@
 
 <script>
 	import callFunction from "../../../common/callFunction.js"
-	
+
 	const db = uniCloud.database();
 	const dbCmd = db.command;
 	const dbCollectionName = 'openApi';
@@ -137,8 +137,10 @@
 							params: {
 								...this.formData,
 								info: {
-									...this.formData.info,
-									params: _paramOptions
+									url: {
+										...this.formData.info,
+										params: _paramOptions
+									}
 								}
 							},
 						},

@@ -142,8 +142,10 @@
 								id: this.formDataId,
 								...this.formData,
 								info: {
-									...this.formData.info,
-									params: _paramOptions
+									url: {
+										...this.formData.info,
+										params: _paramOptions
+									}
 								}
 							},
 						},
@@ -169,13 +171,16 @@
 					.get().then((res) => {
 						const data = res.result.data[0]
 						if (data) {
-							this.paramOptions = data.info.params.map(p => {
+							this.paramOptions = data.info.url.params.map(p => {
 								return {
 									...p,
 									required: Number(p.required)
 								}
 							})
-							this.formData = data
+							this.formData = {
+								...data,
+								info: data.info.url
+							}
 						}
 					}).catch((err) => {
 						uni.showModal({
