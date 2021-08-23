@@ -77,6 +77,7 @@
 		methods: {
 			handleUrl(id) {
 				// 获取token
+				const token = uni.getStorageSync("uni_id_token");
 				// 这里的url是release环境的云函数url
 				uniCopy({
 					content: `https://86dc45ba-28e8-4734-a880-bbf700b08cf9.bspapp.com/http/openapi?token=${token}&apiID=${id}`,
