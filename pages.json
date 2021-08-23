@@ -66,7 +66,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/openApi/list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
