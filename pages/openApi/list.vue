@@ -6,6 +6,14 @@
 				<view class="uni-sub-title"></view>
 			</view>
 			<view class="uni-group">
+				<div style="margin-right: 20px;">
+					<unicloud-db v-slot:default="{data, loading, error, options}" collection="uni-id-users"
+						field="openApiRequestNumber" :where="{
+						_id: '60841eb4b09d4a000177567c'
+					}">
+						{{(!error && data.length > 0) && `剩余请求次数(每月重置): ${data[0].openApiRequestNumber || 200}次`}}
+					</unicloud-db>
+				</div>
 				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="请输入搜索内容" />
 				<button class="uni-button" type="default" size="mini" @click="search">搜索</button>
 				<button class="uni-button" type="default" size="mini" @click="navigateTo('./add')">新增</button>
@@ -18,8 +26,7 @@
 			}" page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error, options }"
 				:options="options">
-				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection"
-					@selection-change="selectionChange">
+				<uni-table :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection">
 					<uni-tr>
 						<uni-th align="center">api名称</uni-th>
 						<uni-th align="center">备注</uni-th>
