@@ -11,7 +11,7 @@
 						field="openApiRequestNumber" :where="{
 						_id: '60841eb4b09d4a000177567c'
 					}">
-						{{(!error && data.length > 0) && `剩余请求次数(每月重置): ${data[0].openApiRequestNumber || 200}次`}}
+						{{(!error && data.length > 0) ? `剩余请求次数(每月重置): ${data[0].openApiRequestNumber || 200}次` : '--'}}
 					</unicloud-db>
 				</div>
 				<input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="请输入搜索内容" />
