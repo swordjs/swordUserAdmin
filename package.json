@@ -13,7 +13,7 @@
     "剑指题解",
     "后台",
     "管理系统"
-],
+  ],
   "engines": {
     "HBuilderX": "^3.1.1"
   },
@@ -51,6 +51,21 @@
       "permissions": "无"
     },
     "npmurl": ""
+  },
+  "uni-app": {
+    "scripts": {
+      "custom-platform": {
+        "title": "自定义扩展名称",
+        "BROWSER": "",
+        "env": {
+          "UNI_PLATFORM": "",
+          "MY_TEST": ""
+        },
+        "define": {
+          "CUSTOM-CONST": true
+        }
+      }
+    }
   },
   "uni_modules": {
     "dependencies": [],
