@@ -1,25 +1,25 @@
 <template>
 	<view class="login-box">
 		<view class="admin-logo">
-			<image :src="logo" mode="heightFix"></image>
+			<image src="../../static/sword-logo.png" mode="heightFix"></image>
 		</view>
 		<view class="uni-header no-padding">
 			<view class="uni-title">系统登录</view>
 		</view>
 		<view class="uni-container">
 			<uni-forms ref="form" v-model="formData" :rules="rules" @submit="submit">
-				<uni-forms-item left-icon="uni-icons-person-filled" name="username" labelWidth="35">
+				<uni-forms-item left-icon="person-filled" name="username" labelWidth="35">
 					<input ref="usernameInput" @confirm="submitForm" class="uni-input-border" type="text"
 						placeholder="账户" v-model="formData.username" />
 				</uni-forms-item>
-				<uni-forms-item left-icon="uni-icons-locked-filled" class="icon-container" name="password"
+				<uni-forms-item left-icon="locked-filled" class="icon-container" name="password"
 					labelWidth="35">
 					<input ref="passwordInput" @confirm="submitForm" class="uni-input-border" :password="showPassword"
 						placeholder="密码" v-model="formData.password" />
 					<text class="uni-icon-password-eye pointer" :class="[!showPassword ? 'uni-eye-active' : '']"
 						@click="changePassword">&#xe568;</text>
 				</uni-forms-item>
-				<uni-forms-item v-if="needCaptcha" left-icon="uni-icons-person-filled" class="icon-container"
+				<uni-forms-item v-if="needCaptcha" left-icon="person-filled" class="icon-container"
 					name="captcha" labelWidth="35">
 					<input ref="captchaInput" @confirm="submitForm" class="uni-input-border" type="text"
 						placeholder="验证码" v-model="formData.captcha" />
