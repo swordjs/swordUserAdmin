@@ -3,9 +3,6 @@
 		<view class="admin-logo">
 			<image src="../../static/sword-logo.png" mode="heightFix"></image>
 		</view>
-		<view class="uni-header no-padding">
-			<view class="uni-title">系统登录</view>
-		</view>
 		<view class="uni-container">
 			<uni-forms ref="form" v-model="formData" :rules="rules" @submit="submit">
 				<uni-forms-item left-icon="person-filled" name="username" labelWidth="35">
@@ -257,7 +254,7 @@ page {
   position: relative;
   max-width: 350px;
   flex: 1;
-  padding: 140px 35px 0;
+  padding: 25vh 35px 0;
   margin: 0 auto;
   overflow: hidden;
   /* background-color: #F5F5F5; */
