@@ -13,14 +13,21 @@
 				</uni-forms-item>
 				<!-- 选择专区 -->
 				<uni-forms-item name="areaID" label="选择专区" required>
-					<uni-data-picker style="width: 100%;" v-model="formData.areaID" preload placeholder="请选择专区"
-						popup-title="全部专区" collection="questionArea" field="_id as value, name as text">
-					</uni-data-picker>
+					<uni-data-picker
+						style="width: 100%;"
+						v-model="formData.areaID"
+						preload
+						placeholder="请选择专区"
+						popup-title="全部专区"
+						collection="questionArea"
+						field="_id as value, name as text"
+					></uni-data-picker>
 				</uni-forms-item>
 				<view class="uni-button-group">
 					<button style="width: 100px;" type="primary" class="uni-button" @click="submitForm">提交</button>
-					<navigator open-type="navigateBack" style="margin-left: 15px;"><button style="width: 100px;"
-							class="uni-button">返回</button></navigator>
+					<navigator open-type="navigateBack" style="margin-left: 15px;">
+						<button style="width: 100px;" class="uni-button">返回</button>
+					</navigator>
 				</view>
 			</uni-forms>
 		</view>
@@ -28,67 +35,63 @@
 </template>
 
 <script>
-	import callFunction from "../../../common/callFunction.js"
-	export default {
-		data() {
-			return {
-				rules: {
-					name: {
-						rules: [{
-							required: true,
-							errorMessage: '请输入标签名称',
-						}]
-					},
-					areaID: {
-						rules: [{
-							required: true,
-							errorMessage: '请选择专区',
-						}]
-					}
+import callFunction from "../../../common/callFunction.js"
+export default {
+	data() {
+		return {
+			rules: {
+				name: {
+					rules: [{
+						required: true,
+						errorMessage: '请输入标签名称',
+					}]
 				},
-				formData: {
-					name: "",
-					areaID: ""
+				areaID: {
+					rules: [{
+						required: true,
+						errorMessage: '请选择专区',
+					}]
 				}
-			};
-		},
-		methods: {
-			// 提交
-			submitForm() {
-				this.$refs.form.submit().then(async res => {
-					uni.showLoading({
-						title: "提交中...",
-						mask: true
-					});
-					const addResult = await callFunction({
-						name: "application",
-						data: {
-						  route: `api/questionTag`,
-						  method: "POST",
-						  params: this.formData,
-						},
-					});
-					uni.hideLoading();
-					if(addResult.success){
-						uni.showToast({
-							title: "新增标签成功",
-							icon: "none"
-						});
-						// 重置表单内容，不能调用form中的resetFields方法，我们只清除标题和内容
-						this.formData.name = "";
-					}
-				}).catch(err => {
-					uni.showToast({
-						title: "表单信息填写不正确",
-						icon: "none"
-					})
-					console.log('表单错误信息：', err);
-				})
+			},
+			formData: {
+				name: "",
+				areaID: ""
 			}
+		};
+	},
+	methods: {
+		// 提交
+		submitForm() {
+			this.$refs.form.submit().then(async res => {
+				uni.showLoading({
+					title: "提交中...",
+					mask: true
+				});
+				const addResult = await callFunction({
+					route: `api/questionTag`,
+					method: "POST",
+					params: this.formData,
+				});
+				uni.hideLoading();
+				if (addResult.success) {
+					uni.showToast({
+						title: "新增标签成功",
+						icon: "none"
+					});
+					// 重置表单内容，不能调用form中的resetFields方法，我们只清除标题和内容
+					this.formData.name = "";
+				}
+			}).catch(err => {
+				uni.showToast({
+					title: "表单信息填写不正确",
+					icon: "none"
+				})
+				console.log('表单错误信息：', err);
+			})
 		}
 	}
+}
 </script>
 
 <style lang="scss">
-
 </style>

@@ -165,13 +165,10 @@
 					mask: true,
 				});
 				const removeResult = await callFunction({
-					name: "application",
-					data: {
-						route: `api/questionArea`,
-						method: "DELETE",
-						params: {
-							_id: id
-						},
+					route: `api/questionArea`,
+					method: "DELETE",
+					params: {
+						_id: id
 					},
 				});
 				uni.hideLoading();

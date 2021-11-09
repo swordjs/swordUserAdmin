@@ -22,7 +22,7 @@
 						placeholder="验证码" v-model="formData.captcha" />
 					<view class="admin-captcha-img pointer" @click="createCaptcha">
 						<i v-if="captchaLoading" class="uni-loading"></i>
-						<img v-else :src="captchaBase64" width="100%" height="100%"></img>
+						<img v-else :src="captchaBase64" width="100%" height="100%" />
 					</view>
 				</uni-forms-item>
 				<view class="uni-button-group">
@@ -100,6 +100,7 @@ export default {
     };
   },
   mounted() {
+    console.log(process.env);
     // #ifdef H5
     this.focus();
     // #endif

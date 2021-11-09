@@ -16,18 +16,23 @@
 					<uni-easyinput placeholder="请输入云函数对应的路由" v-model="formData.info.url.route" />
 				</view>
 				<view class="info-item">
-					<uni-data-picker placeholder="请输入请求方式, GET/POST/PUT/DELETE"
-						:localdata='[{text: "GET", value: "GET" }, { text: "POST" , value: "POST" },{ text: "PUT" , value: "PUT" },{ text: "DELETE" , value: "DELETE" }]'
-						v-model="formData.info.url.method"></uni-data-picker>
+					<uni-data-picker
+						placeholder="请输入请求方式, GET/POST/PUT/DELETE"
+						:localdata="[{
+						text: "GET", value: "GET" }, { text: "POST" , value: "POST" },{ text: "PUT" , value: "PUT" },{ text: "DELETE" , value: "DELETE" }]"
+						v-model="formData.info.url.method"
+					></uni-data-picker>
 				</view>
 				<!-- 参数列表 -->
 				<view class="params-list">
-					<view class="params-list-item" v-for="(item, index) in paramOptions" :key="index">
+					<view class="params-list-item" v-for="(	item, 	index) in paramOptions" :key="index">
 						<uni-easyinput placeholder="key键名" v-model="item.key" />
 						<view class="required">
-							<uni-data-checkbox v-model="item.required"
-								:localdata="[{text: ' 必填', value: 1 }, { text: '非必填' , value: 0 }]" :multiple="false">
-							</uni-data-checkbox>
+							<uni-data-checkbox
+								v-model="item.required"
+								:localdata="[{ text: ' 必填', value: 1 }, { text: '非必填', value: 0 }]"
+								:multiple="false"
+							></uni-data-checkbox>
 						</view>
 						<view class="delete" @click="handleClickDeleteOption(index)">
 							<uni-icons type="close"></uni-icons>
@@ -48,178 +53,175 @@
 </template>
 
 <script>
-	import callFunction from "../../../common/callFunction.js"
+import callFunction from "../../../common/callFunction.js"
 
 
-	const db = uniCloud.database();
-	const dbCmd = db.command;
-	const dbCollectionName = 'openApi';
+const db = uniCloud.database();
+const dbCmd = db.command;
+const dbCollectionName = 'openApi';
 
 
-	export default {
-		data() {
-			return {
-				formData: {
-					name: "",
-					remark: "",
-					info: {
-						url: {
-							name: "",
-							route: "",
-							method: ""
-						}
+export default {
+	data() {
+		return {
+			formData: {
+				name: "",
+				remark: "",
+				info: {
+					url: {
+						name: "",
+						route: "",
+						method: ""
 					}
-				},
-				paramOptions: [],
-			}
+				}
+			},
+			paramOptions: [],
+		}
+	},
+	onLoad(e) {
+		const id = e.id
+		this.formDataId = id
+		this.getDetail(id)
+	},
+	methods: {
+		handleAddParamOption() {
+			this.paramOptions.push({
+				key: "",
+				required: 1
+			})
 		},
-		onLoad(e) {
-			const id = e.id
-			this.formDataId = id
-			this.getDetail(id)
+		handleClickDeleteOption(index) {
+			this.paramOptions.splice(index, 1)
 		},
-		methods: {
-			handleAddParamOption() {
-				this.paramOptions.push({
-					key: "",
-					required: 1
+		handleParams() {
+			// 校验是否为空
+			if (this.formData.name === "" || this.formData.remark === "") {
+				uni.showToast({
+					title: "请输入api名称和备注",
+					icon: "none"
 				})
-			},
-			handleClickDeleteOption(index) {
-				this.paramOptions.splice(index, 1)
-			},
-			handleParams() {
-				// 校验是否为空
-				if (this.formData.name === "" || this.formData.remark === "") {
-					uni.showToast({
-						title: "请输入api名称和备注",
-						icon: "none"
-					})
-					return;
-				} else if (this.formData.info.url.name === "" || this.formData.info.url.route === "" || this.formData.info
-					.url.method === "") {
-					uni.showToast({
-						title: "请输入url信息(云函数名称，路由，请求方法)",
-						icon: "none"
-					})
-					return;
-				}
-				// 如果有参数列表的话，就校验key是否填写了
-				if (this.paramOptions.length > 0) {
-					for (let key in this.paramOptions) {
-						let e = this.paramOptions[key];
-						if (e.key === "") {
-							uni.showToast({
-								title: `您的第${Number(key) + 1}个参数的key未填写`,
-								icon: "none"
-							})
-							return;
-						}
-					}
-				}
-				return true;
-			},
-			/**
-			 * 触发表单提交
-			 */
-			async submit() {
-				if (this.handleParams()) {
-					// 将paramOptions中的必填转换为boolean
-					const _paramOptions = this.paramOptions.map(p => {
-						return {
-							...p,
-							required: Boolean(p.required)
-						}
-					})
-					uni.showLoading({
-						title: "提交中...",
-						mask: true
-					});
-					const addResult = await callFunction({
-						name: "application",
-						data: {
-							route: `api/openApi`,
-							method: "PUT",
-							params: {
-								id: this.formDataId,
-								...this.formData,
-								info: {
-									url: {
-										...this.formData.info.url,
-										params: _paramOptions
-									}
-								}
-							},
-						},
-					});
-					uni.hideLoading();
-					if (addResult.success) {
+				return;
+			} else if (this.formData.info.url.name === "" || this.formData.info.url.route === "" || this.formData.info
+				.url.method === "") {
+				uni.showToast({
+					title: "请输入url信息(云函数名称，路由，请求方法)",
+					icon: "none"
+				})
+				return;
+			}
+			// 如果有参数列表的话，就校验key是否填写了
+			if (this.paramOptions.length > 0) {
+				for (let key in this.paramOptions) {
+					let e = this.paramOptions[key];
+					if (e.key === "") {
 						uni.showToast({
-							title: "修改成功",
+							title: `您的第${Number(key) + 1}个参数的key未填写`,
 							icon: "none"
-						});
+						})
+						return;
 					}
 				}
-			},
-			/**
-			 * 获取表单数据
-			 * @param {Object} id
-			 */
-			getDetail(id) {
-				uni.showLoading({
-					mask: true
-				})
-				db.collection(dbCollectionName).doc(id).field('name,remark,info')
-					.get().then((res) => {
-						const data = res.result.data[0]
-						if (data) {
-							this.paramOptions = data.info.url.params.map(p => {
-								return {
-									...p,
-									required: Number(p.required)
-								}
-							})
-							console.log(data)
-							this.formData = data;
-						}
-					}).catch((err) => {
-						uni.showModal({
-							content: err.message || '请求服务失败',
-							showCancel: false
-						})
-					}).finally(() => {
-						uni.hideLoading()
-					})
 			}
+			return true;
+		},
+		/**
+		 * 触发表单提交
+		 */
+		async submit() {
+			if (this.handleParams()) {
+				// 将paramOptions中的必填转换为boolean
+				const _paramOptions = this.paramOptions.map(p => {
+					return {
+						...p,
+						required: Boolean(p.required)
+					}
+				})
+				uni.showLoading({
+					title: "提交中...",
+					mask: true
+				});
+				const addResult = await callFunction({
+					route: `api/openApi`,
+					method: "PUT",
+					params: {
+						id: this.formDataId,
+						...this.formData,
+						info: {
+							url: {
+								...this.formData.info.url,
+								params: _paramOptions
+							}
+						}
+					},
+				});
+				uni.hideLoading();
+				if (addResult.success) {
+					uni.showToast({
+						title: "修改成功",
+						icon: "none"
+					});
+				}
+			}
+		},
+		/**
+		 * 获取表单数据
+		 * @param {Object} id
+		 */
+		getDetail(id) {
+			uni.showLoading({
+				mask: true
+			})
+			db.collection(dbCollectionName).doc(id).field('name,remark,info')
+				.get().then((res) => {
+					const data = res.result.data[0]
+					if (data) {
+						this.paramOptions = data.info.url.params.map(p => {
+							return {
+								...p,
+								required: Number(p.required)
+							}
+						})
+						console.log(data)
+						this.formData = data;
+					}
+				}).catch((err) => {
+					uni.showModal({
+						content: err.message || '请求服务失败',
+						showCancel: false
+					})
+				}).finally(() => {
+					uni.hideLoading()
+				})
 		}
 	}
+}
 </script>
 
 <style lang="scss">
-	.info-item {
-		margin-top: 10px;
-	}
+.info-item {
+	margin-top: 10px;
+}
 
-	.params-list {
-		.params-list-item {
-			position: relative;
-			padding: 20px 0;
+.params-list {
+	.params-list-item {
+		position: relative;
+		padding: 20px 0;
 
-			&:not(:last-child) {
-				border-bottom: 1px solid #ccc;
-			}
+		&:not(:last-child) {
+			border-bottom: 1px solid #ccc;
+		}
 
-			.required {
-				margin-top: 10px;
-			}
+		.required {
+			margin-top: 10px;
+		}
 
-			.delete {
-				position: absolute;
-				right: -10%;
-				top: 50%;
-				transform: translateY(-50%);
-				cursor: pointer;
-			}
+		.delete {
+			position: absolute;
+			right: -10%;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
 		}
 	}
+}
 </style>
