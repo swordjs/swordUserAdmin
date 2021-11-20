@@ -18,8 +18,8 @@
 				<view class="info-item">
 					<uni-data-picker
 						placeholder="请输入请求方式, GET/POST/PUT/DELETE"
-						:localdata="[{
-						text: "GET", value: "GET" }, { text: "POST" , value: "POST" },{ text: "PUT" , value: "PUT" },{ text: "DELETE" , value: "DELETE" }]"
+						:localdata='[{
+						text: "GET", value: "GET" }, { text: "POST" , value: "POST" },{ text: "PUT" , value: "PUT" },{ text: "DELETE" , value: "DELETE" }]'
 						v-model="formData.info.url.method"
 					></uni-data-picker>
 				</view>

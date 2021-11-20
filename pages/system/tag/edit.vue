@@ -95,7 +95,8 @@ export default {
 					method: "PUT",
 					params: {
 						...this.formData,
-						_id: this.formData.id
+						_id: this.formData.id,
+						id: undefined
 					},
 				});
 				uni.hideLoading();

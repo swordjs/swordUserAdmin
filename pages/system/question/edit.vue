@@ -135,6 +135,7 @@ export default {
 					params: {
 						...this.formData,
 						_id: this.formData.id,
+						id: undefined
 					},
 				});
 				uni.hideLoading();
