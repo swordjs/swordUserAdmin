@@ -13,7 +13,7 @@
 				collection="question"
 				field="title, content,tagID,areaID"
 				:getone="true"
-				:where="`_id=='${formData.id}'`"
+				:where="`_id=='${formData._id}'`"
 				:manual="true"
 			>
 				<uni-forms ref="form" :value="formData" :rules="rules" validate-trigger="submit">
@@ -70,7 +70,7 @@
 import callFunction from "../../common/callFunction.js"
 export default {
 	onLoad(e) {
-		this.formData.id = e.id;
+		this.formData._id = e.id;
 	},
 	mounted() {
 		this.loadData();
@@ -98,7 +98,7 @@ export default {
 				}
 			},
 			formData: {
-				id: "",
+				_id: "",
 				title: "",
 				areaID: "",
 				tagID: [],
@@ -132,10 +132,7 @@ export default {
 				const editResult = await callFunction({
 					route: `api/question`,
 					method: "PUT",
-					params: {
-						...this.formData,
-						_id: this.formData.id,
-					},
+					params: this.formData,
 				});
 				uni.hideLoading();
 				if (editResult.success) {
