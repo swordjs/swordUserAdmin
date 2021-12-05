@@ -100,7 +100,6 @@ export default {
     };
   },
   mounted() {
-    console.log(process.env);
     // #ifdef H5
     this.focus();
     // #endif
