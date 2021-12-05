@@ -65,6 +65,7 @@ export default {
 	data() {
 		return {
 			formData: {
+				_id: "",
 				name: "",
 				remark: "",
 				info: {
@@ -79,9 +80,8 @@ export default {
 		}
 	},
 	onLoad(e) {
-		const id = e.id
-		this.formDataId = id
-		this.getDetail(id)
+		this.formData._id = e.id
+		this.getDetail(this.formData._id)
 	},
 	methods: {
 		handleAddParamOption() {
@@ -144,7 +144,6 @@ export default {
 					route: `api/openApi`,
 					method: "PUT",
 					params: {
-						id: this.formDataId,
 						...this.formData,
 						info: {
 							url: {
@@ -181,8 +180,10 @@ export default {
 								required: Number(p.required)
 							}
 						})
-						console.log(data)
-						this.formData = data;
+						this.formData = {
+							...data,
+							id: undefined
+						};
 					}
 				}).catch((err) => {
 					uni.showModal({
