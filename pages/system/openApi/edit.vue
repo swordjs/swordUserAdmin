@@ -58,7 +58,7 @@ import callFunction from "../../../common/callFunction.js"
 
 const db = uniCloud.database();
 const dbCmd = db.command;
-const dbCollectionName = 'openApi';
+const dbCollectionName = 'sword-open-api';
 
 
 export default {
