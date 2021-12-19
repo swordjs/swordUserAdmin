@@ -15,7 +15,7 @@
 			<unicloud-db
 				ref="dataQuery"
 				@load="onqueryload"
-				collection="questionTag,questionArea"
+				collection="sword-question-tag,sword-question-area"
 				:options="options"
 				:where="{
 					...where,

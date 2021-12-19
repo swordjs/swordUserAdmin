@@ -24,7 +24,7 @@
 		<view class="uni-container">
 			<unicloud-db
 				ref="udb"
-				collection="openApi"
+				collection="sword-open-api"
 				field="name,remark"
 				:where="{
 					...where,

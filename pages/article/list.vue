@@ -20,7 +20,7 @@
 			<unicloud-db
 				ref="dataQuery"
 				@load="onqueryload"
-				collection="article,questionTag,uni-id-users"
+				collection="sword-article,sword-question-tag,uni-id-users"
 				:options="options"
 				field="title,content,tagID{name},userID{nickname},createDate"
 				:where="(where !== '' ? where + '&&' : '') + `state == '${state}' && userID._id == '${uid}'`"

@@ -10,7 +10,7 @@
 			<unicloud-db
 				ref="udb"
 				v-slot:default="{ data, loading, error, options }"
-				collection="questionTag"
+				collection="sword-question-tag"
 				field="name,areaID"
 				:getone="true"
 				:where="`_id=='${formData.id}'`"

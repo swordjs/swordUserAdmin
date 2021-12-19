@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		<view class="uni-container">
-			<unicloud-db ref="dataQuery" @load="onqueryload" collection="questionArea" :options="options" :where="{
+			<unicloud-db ref="dataQuery" @load="onqueryload" collection="sword-question-area" :options="options" :where="{
 				...where,
 				deleteDate: ''
 			}" page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"

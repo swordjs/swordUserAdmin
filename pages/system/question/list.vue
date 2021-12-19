@@ -18,7 +18,7 @@
 				<a-tab-pane key="pass" tab="已审核"></a-tab-pane>
 				<a-tab-pane key="reject" tab="已拒绝"></a-tab-pane>
 			</a-tabs>
-			<unicloud-db ref="dataQuery" @load="onqueryload" collection="question,questionTag,uni-id-users"
+			<unicloud-db ref="dataQuery" @load="onqueryload" collection="sword-question,sword-question-tag,uni-id-users"
 				:options="options" :where="(where !== '' ? where + '&&' : '') + `state == '${state}'`"
 				field="tagID{name},content,title,examineInfo,createDate,publishUserID{nickname}" page-data="replace"
 				:orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"

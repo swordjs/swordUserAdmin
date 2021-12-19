@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="uni-container">
-			<unicloud-db ref="udb" collection="openApi" field="name,remark,state,info,createDate,updateDate"
+			<unicloud-db ref="udb" collection="sword-open-api" field="name,remark,state,info,createDate,updateDate"
 				:where="where" page-data="replace" :orderby="orderby" :getcount="true" :page-size="options.pageSize"
 				:page-current="options.pageCurrent" v-slot:default="{ data, pagination, loading, error, options }"
 				:options="options">

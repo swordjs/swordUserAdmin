@@ -10,7 +10,7 @@
 			<unicloud-db
 				ref="udb"
 				v-slot:default="{ data, loading, error, options }"
-				collection="article,questionTag,uni-id-users"
+				collection="sword-article,sword-question-tag,uni-id-users"
 				field="title,content,tagID{name}"
 				:getone="true"
 				:where="`_id=='${id}'`"
