@@ -18,7 +18,6 @@ export default (params) => {
         'sword-platform': UNI_PLATFORM
       },
       success: (res) => {
-        console.log(res);
         resolve({
           success: true,
           data: res.data

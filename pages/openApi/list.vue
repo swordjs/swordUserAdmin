@@ -77,6 +77,7 @@
 
 <script>
 import uniCopy from '@/js_sdk/xb-copy/uni-copy.js'
+import callFunction from "../../common/callFunction.js"
 
 const db = uniCloud.database()
 // 表查询配置
@@ -89,6 +90,7 @@ const pageCurrent = 1
 export default {
 	data() {
 		return {
+			accesskey: null,
 			query: '',
 			where: '',
 			orderby: dbOrderBy,
@@ -103,13 +105,45 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		// 判断有没有初始化accesstoken，如果没有则提示
+		uni.showLoading({
+			title: '密钥获取中...',
+			mask: true
+		});
+		db.collection('sword-user-accesskey')
+			.where({
+				user_id: uni.getStorageSync("uid")
+			}).get()
+			.then(async (res) => {
+				if (res.success) {
+					let accesskey = null
+					if (res.result.data.length === 0) {
+						// 自动调用初始化accesskey
+						const res = await callFunction({
+							route: `api/accesskey/generateAccesskey`,
+							method: "POST"
+						});
+						accesskey = res.data;
+					} else {
+						accesskey = res.result.data[0].accesskey
+					}
+					this.accesskey = accesskey;
+					uni.hideLoading()
+				} else {
+					uni.hideLoading()
+					uni.showToast({
+						title: "查询accesskey未知错误",
+						icon: "none"
+					})
+				}
+			})
+	},
 	methods: {
 		handleUrl(id) {
-			// 获取token
-			const token = uni.getStorageSync("uni_id_token");
 			// 这里的url是release环境的云函数url
 			uniCopy({
-				content: `https://86dc45ba-28e8-4734-a880-bbf700b08cf9.bspapp.com/http/openapi?token=${token}&apiID=${id}`,
+				content: `https://86dc45ba-28e8-4734-a880-bbf700b08cf9.bspapp.com/http/openapi?accesskey=${this.accesskey}&apiID=${id}`,
 				success: () => {
 					uni.showToast({
 						title: "URL复制成功",
