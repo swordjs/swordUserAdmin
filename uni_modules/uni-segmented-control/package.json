@@ -8,7 +8,7 @@
     "SegmentedControl",
     "segement",
     "顶部选择"
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""

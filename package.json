@@ -6,6 +6,7 @@
   "description": "互联网人题解神器，神器在手，offer我有 随手刷题 | 无广告绿色免费 | 个性推荐",
   "main": "main.js",
   "scripts": {
+    "prettier": "prettier --write '**/*.{.vue,ts,js,json,markdown}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "https://github.com/dcloudio/uni-template-admin.git",
@@ -106,5 +107,8 @@
         }
       }
     }
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   }
 }

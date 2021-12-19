@@ -1,39 +1,36 @@
-
 // 表单校验规则由 schema2code 生成，不建议直接修改校验规则，而建议通过 schema2code 生成, 详情: https://uniapp.dcloud.net.cn/uniCloud/schema
 
-
-
 const validator = {
-  "name": {
-    "rules": [
+  name: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "remark": {
-    "rules": [
+  remark: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "state": {
-    "rules": [
+  state: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "info": {
-    "rules": [
+  info: {
+    rules: [
       {
-        "format": "object"
+        format: 'object'
       }
     ]
-  },
-}
+  }
+};
 
-const enumConverter = {}
+const enumConverter = {};
 
-export { validator, enumConverter }
+export { validator, enumConverter };

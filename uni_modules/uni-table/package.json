@@ -9,7 +9,7 @@
     "table",
     "uni-table",
     "表格"
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""

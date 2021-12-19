@@ -2,8 +2,8 @@ export default {
   props: {
     localdata: {
       type: [Array, Object],
-      default () {
-        return []
+      default() {
+        return [];
       }
     },
     collection: {
@@ -56,8 +56,8 @@ export default {
     },
     value: {
       type: [Array, String, Number],
-      default () {
-        return []
+      default() {
+        return [];
       }
     },
     preload: {
@@ -98,257 +98,261 @@ export default {
         size: this.pageSize,
         count: 0
       }
-    }
+    };
   },
   computed: {
     isLocaldata() {
-      return !this.collection.length
+      return !this.collection.length;
     },
     postField() {
-			let fields = [this.field];
-			if (this.parentField) {
-				fields.push(`${this.parentField} as parent_value`);
-			}
+      let fields = [this.field];
+      if (this.parentField) {
+        fields.push(`${this.parentField} as parent_value`);
+      }
       return fields.join(',');
     }
   },
   created() {
-    this.$watch(() => {
-      var al = [];
-      ['pageCurrent',
-        'pageSize',
-        'value',
-        'localdata',
-        'collection',
-        'action',
-        'field',
-        'orderby',
-        'where',
-        'getont',
-        'getcount',
-        'gettree'
-      ].forEach(key => {
-        al.push(this[key])
-      });
-      return al
-    }, (newValue, oldValue) => {
-      let needReset = false
-      for (let i = 2; i < newValue.length; i++) {
-        if (newValue[i] != oldValue[i]) {
-          needReset = true
-          break
+    this.$watch(
+      () => {
+        var al = [];
+        ['pageCurrent', 'pageSize', 'value', 'localdata', 'collection', 'action', 'field', 'orderby', 'where', 'getont', 'getcount', 'gettree'].forEach(
+          (key) => {
+            al.push(this[key]);
+          }
+        );
+        return al;
+      },
+      (newValue, oldValue) => {
+        let needReset = false;
+        for (let i = 2; i < newValue.length; i++) {
+          if (newValue[i] != oldValue[i]) {
+            needReset = true;
+            break;
+          }
         }
-      }
-      if (newValue[0] != oldValue[0]) {
-        this.page.current = this.pageCurrent
-      }
-      this.page.size = this.pageSize
+        if (newValue[0] != oldValue[0]) {
+          this.page.current = this.pageCurrent;
+        }
+        this.page.size = this.pageSize;
 
-      this.onPropsChange()
-    })
-    this._treeData = []
+        this.onPropsChange();
+      }
+    );
+    this._treeData = [];
   },
   methods: {
     onPropsChange() {
-      this._treeData = []
+      this._treeData = [];
     },
     getCommand(options = {}) {
       /* eslint-disable no-undef */
-      let db = uniCloud.database()
+      let db = uniCloud.database();
 
-      const action = options.action || this.action
+      const action = options.action || this.action;
       if (action) {
-        db = db.action(action)
+        db = db.action(action);
       }
 
-      const collection = options.collection || this.collection
-      db = db.collection(collection)
+      const collection = options.collection || this.collection;
+      db = db.collection(collection);
 
-      const where = options.where || this.where
+      const where = options.where || this.where;
       if (!(!where || !Object.keys(where).length)) {
-        db = db.where(where)
+        db = db.where(where);
       }
 
-      const field = options.field || this.field
+      const field = options.field || this.field;
       if (field) {
-        db = db.field(field)
+        db = db.field(field);
       }
 
-      const orderby = options.orderby || this.orderby
+      const orderby = options.orderby || this.orderby;
       if (orderby) {
-        db = db.orderBy(orderby)
+        db = db.orderBy(orderby);
       }
 
-      const current = options.pageCurrent !== undefined ? options.pageCurrent : this.page.current
-      const size = options.pageSize !== undefined ? options.pageSize : this.page.size
-      const getCount = options.getcount !== undefined ? options.getcount : this.getcount
-      const getTree = options.gettree !== undefined ? options.gettree : this.gettree
+      const current = options.pageCurrent !== undefined ? options.pageCurrent : this.page.current;
+      const size = options.pageSize !== undefined ? options.pageSize : this.page.size;
+      const getCount = options.getcount !== undefined ? options.getcount : this.getcount;
+      const getTree = options.gettree !== undefined ? options.gettree : this.gettree;
 
       const getOptions = {
         getCount,
         getTree
-      }
+      };
       if (options.getTreePath) {
-        getOptions.getTreePath = options.getTreePath
+        getOptions.getTreePath = options.getTreePath;
       }
 
-      db = db.skip(size * (current - 1)).limit(size).get(getOptions)
+      db = db
+        .skip(size * (current - 1))
+        .limit(size)
+        .get(getOptions);
 
-      return db
+      return db;
     },
-		getNodeData(callback) {
-		  if (this.loading) {
-		    return
-		  }
-		  this.loading = true
-		  this.getCommand({
-		    field: this.postField,
-				where: this._pathWhere()
-		  }).then((res) => {
-		    this.loading = false
-		    this.selected = res.result.data
-		    callback && callback()
-		  }).catch((err) => {
-		    this.loading = false
-		    this.errorMessage = err
-		  })
-		},
+    getNodeData(callback) {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.getCommand({
+        field: this.postField,
+        where: this._pathWhere()
+      })
+        .then((res) => {
+          this.loading = false;
+          this.selected = res.result.data;
+          callback && callback();
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.errorMessage = err;
+        });
+    },
     getTreePath(callback) {
       if (this.loading) {
-        return
+        return;
       }
-      this.loading = true
+      this.loading = true;
 
       this.getCommand({
         field: this.postField,
         getTreePath: {
           startWith: `${this.selfField}=='${this.value}'`
         }
-      }).then((res) => {
-        this.loading = false
-        let treePath = []
-        this._extractTreePath(res.result.data, treePath)
-        this.selected = treePath
-        callback && callback()
-      }).catch((err) => {
-        this.loading = false
-        this.errorMessage = err
       })
+        .then((res) => {
+          this.loading = false;
+          let treePath = [];
+          this._extractTreePath(res.result.data, treePath);
+          this.selected = treePath;
+          callback && callback();
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.errorMessage = err;
+        });
     },
     loadData() {
       if (this.isLocaldata) {
-        this._processLocalData()
-        return
+        this._processLocalData();
+        return;
       }
 
       if (this.value.length) {
         this._loadNodeData((data) => {
-          this._treeData = data
-          this._updateBindData()
-          this._updateSelected()
-        })
-        return
+          this._treeData = data;
+          this._updateBindData();
+          this._updateSelected();
+        });
+        return;
       }
 
       if (this.stepSearh) {
         this._loadNodeData((data) => {
-          this._treeData = data
-          this._updateBindData()
-        })
+          this._treeData = data;
+          this._updateBindData();
+        });
       } else {
         this._loadAllData((data) => {
-          this._treeData = []
-          this._extractTree(data, this._treeData, null)
-          this._updateBindData()
-        })
+          this._treeData = [];
+          this._extractTree(data, this._treeData, null);
+          this._updateBindData();
+        });
       }
     },
     _loadAllData(callback) {
       if (this.loading) {
-        return
+        return;
       }
-      this.loading = true
+      this.loading = true;
 
       this.getCommand({
         field: this.postField,
         gettree: true,
         startwith: `${this.selfField}=='${this.value}'`
-      }).then((res) => {
-        this.loading = false
-        callback(res.result.data)
-        this.onDataChange()
-      }).catch((err) => {
-        this.loading = false
-        this.errorMessage = err
       })
+        .then((res) => {
+          this.loading = false;
+          callback(res.result.data);
+          this.onDataChange();
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.errorMessage = err;
+        });
     },
     _loadNodeData(callback, pw) {
       if (this.loading) {
-        return
+        return;
       }
-      this.loading = true
+      this.loading = true;
 
       this.getCommand({
         field: this.postField,
         where: pw || this._postWhere(),
         pageSize: 500
-      }).then((res) => {
-        this.loading = false
-        callback(res.result.data)
-        this.onDataChange()
-      }).catch((err) => {
-        this.loading = false
-        this.errorMessage = err
       })
+        .then((res) => {
+          this.loading = false;
+          callback(res.result.data);
+          this.onDataChange();
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.errorMessage = err;
+        });
     },
     _pathWhere() {
-      let result = []
+      let result = [];
       let where_field = this._getParentNameByField();
       if (where_field) {
-        result.push(`${where_field} == '${this.value}'`)
+        result.push(`${where_field} == '${this.value}'`);
       }
 
       if (this.where) {
-        return `(${this.where}) && (${result.join(' || ')})`
+        return `(${this.where}) && (${result.join(' || ')})`;
       }
 
-      return result.join(' || ')
+      return result.join(' || ');
     },
     _postWhere() {
-      let result = []
-      let selected = this.selected
-      let parentField = this.parentField
+      let result = [];
+      let selected = this.selected;
+      let parentField = this.parentField;
       if (parentField) {
-        result.push(`${parentField} == null || ${parentField} == ""`)
+        result.push(`${parentField} == null || ${parentField} == ""`);
       }
       if (selected.length) {
         for (var i = 0; i < selected.length - 1; i++) {
-          result.push(`${parentField} == '${selected[i].value}'`)
+          result.push(`${parentField} == '${selected[i].value}'`);
         }
       }
 
-      let where = []
+      let where = [];
       if (this.where) {
-        where.push(`(${this.where})`)
+        where.push(`(${this.where})`);
       }
       if (result.length) {
-        where.push(`(${result.join(' || ')})`)
+        where.push(`(${result.join(' || ')})`);
       }
 
-      return where.join(' && ')
+      return where.join(' && ');
     },
     _nodeWhere() {
-      let result = []
-      let selected = this.selected
+      let result = [];
+      let selected = this.selected;
       if (selected.length) {
-        result.push(`${this.parentField} == '${selected[selected.length - 1].value}'`)
+        result.push(`${this.parentField} == '${selected[selected.length - 1].value}'`);
       }
 
       if (this.where) {
-        return `(${this.where}) && (${result.join(' || ')})`
+        return `(${this.where}) && (${result.join(' || ')})`;
       }
 
-      return result.join(' || ')
+      return result.join(' || ');
     },
     _getParentNameByField() {
       const fields = this.field.split(',');
@@ -363,165 +367,160 @@ export default {
           break;
         }
       }
-      return where_field
+      return where_field;
     },
     _isTreeView() {
-      return (this.parentField && this.selfField)
+      return this.parentField && this.selfField;
     },
     _updateSelected() {
-      var dl = this.dataList
-      var sl = this.selected
+      var dl = this.dataList;
+      var sl = this.selected;
       for (var i = 0; i < sl.length; i++) {
-        var value = sl[i].value
-        var dl2 = dl[i]
+        var value = sl[i].value;
+        var dl2 = dl[i];
         for (var j = 0; j < dl2.length; j++) {
-          var item2 = dl2[j]
+          var item2 = dl2[j];
           if (item2.value === value) {
-            sl[i].text = item2.text
-            break
+            sl[i].text = item2.text;
+            break;
           }
         }
       }
     },
     _updateBindData(node) {
-      const {
-        dataList,
-        hasNodes
-      } = this._filterData(this._treeData, this.selected)
+      const { dataList, hasNodes } = this._filterData(this._treeData, this.selected);
 
-      let isleaf = this._stepSearh === false && !hasNodes
+      let isleaf = this._stepSearh === false && !hasNodes;
 
       if (node) {
-        node.isleaf = isleaf
+        node.isleaf = isleaf;
       }
 
-      this.dataList = dataList
-      this.selectedIndex = dataList.length - 1
+      this.dataList = dataList;
+      this.selectedIndex = dataList.length - 1;
 
       if (!isleaf && this.selected.length < dataList.length) {
         this.selected.push({
           value: null,
-          text: "请选择"
-        })
+          text: '请选择'
+        });
       }
 
       return {
         isleaf,
         hasNodes
-      }
+      };
     },
     _filterData(data, paths) {
-      let dataList = []
+      let dataList = [];
 
-      let hasNodes = true
+      let hasNodes = true;
 
-      dataList.push(data.filter((item) => {
-        return item.parent_value === undefined
-      }))
-      for (let i = 0; i < paths.length; i++) {
-        var value = paths[i].value
-        var nodes = data.filter((item) => {
-          return item.parent_value === value
+      dataList.push(
+        data.filter((item) => {
+          return item.parent_value === undefined;
         })
+      );
+      for (let i = 0; i < paths.length; i++) {
+        var value = paths[i].value;
+        var nodes = data.filter((item) => {
+          return item.parent_value === value;
+        });
 
         if (nodes.length) {
-          dataList.push(nodes)
+          dataList.push(nodes);
         } else {
-          hasNodes = false
+          hasNodes = false;
         }
       }
 
       return {
         dataList,
         hasNodes
-      }
+      };
     },
     _extractTree(nodes, result, parent_value) {
-      let list = result || []
+      let list = result || [];
       for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i]
+        let node = nodes[i];
 
-        let child = {}
+        let child = {};
         for (let key in node) {
           if (key !== 'children') {
-            child[key] = node[key]
+            child[key] = node[key];
           }
         }
         if (parent_value !== undefined) {
-          child.parent_value = parent_value
+          child.parent_value = parent_value;
         }
-        result.push(child)
+        result.push(child);
 
-        let children = node.children
+        let children = node.children;
         if (children) {
-          this._extractTree(children, result, node.value)
+          this._extractTree(children, result, node.value);
         }
       }
     },
     _extractTreePath(nodes, result) {
-      let list = result || []
+      let list = result || [];
       for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i]
+        let node = nodes[i];
 
-        let child = {}
+        let child = {};
         for (let key in node) {
           if (key !== 'children') {
-            child[key] = node[key]
+            child[key] = node[key];
           }
         }
-        result.push(child)
+        result.push(child);
 
-        let children = node.children
+        let children = node.children;
         if (children) {
-          this._extractTreePath(children, result)
+          this._extractTreePath(children, result);
         }
       }
     },
     _findNodePath(key, nodes, path = []) {
       for (let i = 0; i < nodes.length; i++) {
-        let {
-          value,
-          text,
-          children
-        } = nodes[i]
+        let { value, text, children } = nodes[i];
 
         path.push({
           value,
           text
-        })
+        });
 
         if (value === key) {
-          return path
+          return path;
         }
 
         if (children) {
-          const p = this._findNodePath(key, children, path)
+          const p = this._findNodePath(key, children, path);
           if (p.length) {
-            return p
+            return p;
           }
         }
 
-        path.pop()
+        path.pop();
       }
-      return []
+      return [];
     },
     _processLocalData() {
-      this._treeData = []
-      this._extractTree(this.localdata, this._treeData)
+      this._treeData = [];
+      this._extractTree(this.localdata, this._treeData);
 
-      var inputValue = this.value
+      var inputValue = this.value;
       if (inputValue === undefined) {
-        return
+        return;
       }
 
       if (Array.isArray(inputValue)) {
-        inputValue = inputValue[inputValue.length - 1]
+        inputValue = inputValue[inputValue.length - 1];
         if (typeof inputValue === 'object' && inputValue.value) {
-          inputValue = inputValue.value
+          inputValue = inputValue.value;
         }
       }
 
-      this.selected = this._findNodePath(inputValue, this.localdata)
+      this.selected = this._findNodePath(inputValue, this.localdata);
     }
   }
-}
+};

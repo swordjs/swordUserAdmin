@@ -8,7 +8,7 @@
     "uniui",
     "加载更多",
     "load-more"
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""

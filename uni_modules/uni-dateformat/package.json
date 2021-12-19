@@ -10,7 +10,7 @@
     "时间格式化",
     "格式化时间",
     ""
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""

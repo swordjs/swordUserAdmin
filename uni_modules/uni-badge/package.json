@@ -10,7 +10,7 @@
     "uniui",
     "数字角标",
     "徽章"
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""

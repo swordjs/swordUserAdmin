@@ -1,37 +1,35 @@
 // 校验规则由 schema 生成，请不要直接修改当前文件，如果需要请在uniCloud控制台修改schema
 // uniCloud: https://unicloud.dcloud.net.cn/
 
-
-
 export default {
-  "permission_id": {
-    "rules": [
+  permission_id: {
+    rules: [
       {
-        "required": true
+        required: true
       },
       {
-        "format": "string"
+        format: 'string'
       }
     ],
-    "label": "权限标识"
+    label: '权限标识'
   },
-  "permission_name": {
-    "rules": [
+  permission_name: {
+    rules: [
       {
-        "required": true
+        required: true
       },
       {
-        "format": "string"
+        format: 'string'
       }
     ],
-    "label": "权限名称"
+    label: '权限名称'
   },
-  "comment": {
-    "rules": [
+  comment: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ],
-    "label": "备注"
+    label: '备注'
   }
-}
+};

@@ -9,7 +9,7 @@
     "按钮",
     "悬浮按钮",
     "fab"
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""

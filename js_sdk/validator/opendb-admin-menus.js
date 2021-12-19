@@ -1,69 +1,67 @@
 // 校验规则由 schema 生成，请不要直接修改当前文件，如果需要请在uniCloud控制台修改schema
 // uniCloud: https://unicloud.dcloud.net.cn/
 
-
-
 export default {
-  "menu_id": {
-    "rules": [
+  menu_id: {
+    rules: [
       {
-        "required": true
+        required: true
       },
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "name": {
-    "rules": [
+  name: {
+    rules: [
       {
-        "required": true
+        required: true
       },
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "icon": {
-    "rules": [
+  icon: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "url": {
-    "rules": [
+  url: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "sort": {
-    "rules": [
+  sort: {
+    rules: [
       {
-        "format": "int"
+        format: 'int'
       }
     ]
   },
-  "parent_id": {
-    "rules": [
+  parent_id: {
+    rules: [
       {
-        "format": "string"
+        format: 'string'
       }
     ]
   },
-  "permission": {
-    "rules": [
+  permission: {
+    rules: [
       {
-        "format": "array"
+        format: 'array'
       }
     ]
   },
-  "enable": {
-    "rules": [
+  enable: {
+    rules: [
       {
-        "format": "bool"
+        format: 'bool'
       }
     ]
   }
-}
+};

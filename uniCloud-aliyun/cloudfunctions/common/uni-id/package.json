@@ -9,7 +9,7 @@
     "用户管理",
     "用户中心",
     "短信验证码"
-],
+  ],
   "repository": "https://gitee.com/dcloud/uni-id.git",
   "engines": {
     "HBuilderX": "^3.1.0"
@@ -38,7 +38,9 @@
     "npmurl": ""
   },
   "uni_modules": {
-    "dependencies": ["uni-config-center"],
+    "dependencies": [
+      "uni-config-center"
+    ],
     "encrypt": [],
     "platforms": {
       "cloud": {
