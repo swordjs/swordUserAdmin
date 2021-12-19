@@ -1,307 +1,304 @@
 {
-	"pages": [
-		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index"
-		},
-		{
-			"path": "pages/login/login",
-			"style": {
-				"topWindow": false,
-				"leftWindow": false,
-				"navigationBarTitleText": "登录"
-			}
-		},
-		{
-			"path": "pages/error/404",
-			"style": {
-				"navigationBarTitleText": "Not Found"
-			}
-		},
-		{
-			"path": "pages/changepwd/changepwd",
-			"style": {
-				"navigationBarTitleText": "修改密码"
-			}
-		}, {
-			"path": "pages/question/list",
-			"style": {
-				"navigationBarTitleText": "我的题目",
-				"enablePullDownRefresh": false
-			}
+  "pages": [
+    {
+      "path": "pages/index/index"
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "topWindow": false,
+        "leftWindow": false,
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/error/404",
+      "style": {
+        "navigationBarTitleText": "Not Found"
+      }
+    },
+    {
+      "path": "pages/changepwd/changepwd",
+      "style": {
+        "navigationBarTitleText": "修改密码"
+      }
+    },
+    {
+      "path": "pages/question/list",
+      "style": {
+        "navigationBarTitleText": "我的题目",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/question/add",
+      "style": {
+        "navigationBarTitleText": "发布新题目",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/article/list",
+      "style": {
+        "navigationBarTitleText": "文章列表",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/article/add",
+      "style": {
+        "navigationBarTitleText": "发布文章",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/article/detail",
+      "style": {
+        "navigationBarTitleText": "文章详情",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/question/edit",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/openApi/list",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pages/system",
+      "pages": [
+        {
+          "path": "menu/list",
+          "style": {
+            "navigationBarTitleText": "菜单管理"
+          }
+        },
+        {
+          "path": "menu/add",
+          "style": {
+            "navigationBarTitleText": "新增菜单",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "menu/edit",
+          "style": {
+            "navigationBarTitleText": "修改菜单",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "permission/list",
+          "style": {
+            "navigationBarTitleText": "权限管理"
+          }
+        },
+        {
+          "path": "permission/add",
+          "style": {
+            "navigationBarTitleText": "新增权限",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "permission/edit",
+          "style": {
+            "navigationBarTitleText": "修改权限",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "role/add",
+          "style": {
+            "navigationBarTitleText": "新增角色",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "role/edit",
+          "style": {
+            "navigationBarTitleText": "修改角色",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "role/list",
+          "style": {
+            "navigationBarTitleText": "角色管理"
+          }
+        },
+        {
+          "path": "user/add",
+          "style": {
+            "navigationBarTitleText": "新增用户",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "user/edit",
+          "style": {
+            "navigationBarTitleText": "修改用户",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "user/list",
+          "style": {
+            "navigationBarTitleText": "用户管理"
+          }
+        },
 
-		}, {
-			"path": "pages/question/add",
-			"style": {
-				"navigationBarTitleText": "发布新题目",
-				"enablePullDownRefresh": false
-			}
+        {
+          "path": "questionArea/list",
+          "style": {
+            "navigationBarTitleText": "专区列表"
+          }
+        },
+        {
+          "path": "questionArea/add",
+          "style": {
+            "navigationBarTitleText": "新增专区",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "questionArea/edit",
+          "style": {
+            "navigationBarTitleText": "修改专区",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "tag/list",
+          "style": {
+            "navigationBarTitleText": "专区标签"
+          }
+        },
 
-		}, {
-			"path": "pages/article/list",
-			"style": {
-				"navigationBarTitleText": "文章列表",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/article/add",
-			"style": {
-				"navigationBarTitleText": "发布文章",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/article/detail",
-			"style": {
-				"navigationBarTitleText": "文章详情",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/question/edit",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}
-	    ,{
-            "path" : "pages/openApi/list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
+        {
+          "path": "question/list",
+          "style": {
+            "navigationBarTitleText": "审核题目"
+          }
+        },
+        {
+          "path": "question/edit",
+          "style": {
+            "navigationBarTitleText": "审核题目"
+          }
+        },
+        {
+          "path": "question/audit",
+          "style": {
+            "navigationBarTitleText": "",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "tag/add",
+          "style": {
+            "navigationBarTitleText": "新增标签",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "tag/edit",
+          "style": {
+            "navigationBarTitleText": "修改标签",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "article/list",
+          "style": {
+            "navigationBarTitleText": "文章列表",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "article/detail",
+          "style": {
+            "navigationBarTitleText": "文章详情",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "openApi/list",
+          "style": {
+            "navigationBarTitleText": "开放api列表",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "openApi/add",
+          "style": {
+            "navigationBarTitleText": "新增"
+          }
+        },
+        {
+          "path": "openApi/edit",
+          "style": {
+            "navigationBarTitleText": "编辑"
+          }
+        },
+        {
+          "path": "openApi/list",
+          "style": {
+            "navigationBarTitleText": "列表"
+          }
         }
-    ],
-	"subPackages": [{
-			"root": "pages/system",
-			"pages": [{
-					"path": "menu/list",
-					"style": {
-						"navigationBarTitleText": "菜单管理"
-					}
-				},
-				{
-					"path": "menu/add",
-					"style": {
-						"navigationBarTitleText": "新增菜单",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "menu/edit",
-					"style": {
-						"navigationBarTitleText": "修改菜单",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "permission/list",
-					"style": {
-						"navigationBarTitleText": "权限管理"
-					}
-				},
-				{
-					"path": "permission/add",
-					"style": {
-						"navigationBarTitleText": "新增权限",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "permission/edit",
-					"style": {
-						"navigationBarTitleText": "修改权限",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "role/add",
-					"style": {
-						"navigationBarTitleText": "新增角色",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "role/edit",
-					"style": {
-						"navigationBarTitleText": "修改角色",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "role/list",
-					"style": {
-						"navigationBarTitleText": "角色管理"
-					}
-				},
-				{
-					"path": "user/add",
-					"style": {
-						"navigationBarTitleText": "新增用户",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "user/edit",
-					"style": {
-						"navigationBarTitleText": "修改用户",
-						"navigationStyle": "default"
-					}
-				},
-				{
-					"path": "user/list",
-					"style": {
-						"navigationBarTitleText": "用户管理"
-					}
-				},
-
-				{
-					"path": "questionArea/list",
-					"style": {
-						"navigationBarTitleText": "专区列表"
-					}
-				},
-				{
-					"path": "questionArea/add",
-					"style": {
-						"navigationBarTitleText": "新增专区",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "questionArea/edit",
-					"style": {
-						"navigationBarTitleText": "修改专区",
-						"enablePullDownRefresh": false
-					}
-
-				},
-				{
-					"path": "tag/list",
-					"style": {
-						"navigationBarTitleText": "专区标签"
-					}
-				},
-
-				{
-					"path": "question/list",
-					"style": {
-						"navigationBarTitleText": "审核题目"
-					}
-				}, {
-					"path": "question/edit",
-					"style": {
-						"navigationBarTitleText": "审核题目"
-					}
-				}, {
-					"path": "question/audit",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": false
-					}
-
-				}, {
-					"path": "tag/add",
-					"style": {
-						"navigationBarTitleText": "新增标签",
-						"enablePullDownRefresh": false
-					}
-				}, {
-					"path": "tag/edit",
-					"style": {
-						"navigationBarTitleText": "修改标签",
-						"enablePullDownRefresh": false
-					}
-
-				}, {
-					"path": "article/list",
-					"style": {
-						"navigationBarTitleText": "文章列表",
-						"enablePullDownRefresh": false
-					}
-				}, {
-					"path": "article/detail",
-					"style": {
-						"navigationBarTitleText": "文章详情",
-						"enablePullDownRefresh": false
-					}
-
-				}, {
-					"path": "openApi/list",
-					"style": {
-						"navigationBarTitleText": "开放api列表",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "openApi/add",
-					"style": {
-						"navigationBarTitleText": "新增"
-					}
-				},
-				{
-					"path": "openApi/edit",
-					"style": {
-						"navigationBarTitleText": "编辑"
-					}
-				},
-				{
-					"path": "openApi/list",
-					"style": {
-						"navigationBarTitleText": "列表"
-					}
-				}
-			]
-		},
-		{
-			"root": "pages/demo",
-			"pages": [{
-					"path": "init/init",
-					"style": {
-						"topWindow": false,
-						"leftWindow": false,
-						"navigationBarTitleText": "创建超级管理员"
-					}
-				},
-				{
-					"path": "icons/icons",
-					"style": {
-						"navigationBarTitleText": "图标"
-					}
-				},
-				{
-					"path": "table/table",
-					"style": {
-						"navigationBarTitleText": "表格"
-					}
-				}
-			]
-		}
-	],
-	"globalStyle": {
-		"navigationStyle": "custom",
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "管理系统",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"topWindow": {
-		"path": "windows/topWindow",
-		"style": {
-			"height": "60px"
-		},
-		"matchMedia": {
-			"minWidth": 0
-		}
-	},
-	"leftWindow": {
-		"path": "windows/leftWindow",
-		"style": {
-			"width": "240px"
-		}
-	}
+      ]
+    },
+    {
+      "root": "pages/demo",
+      "pages": [
+        {
+          "path": "init/init",
+          "style": {
+            "topWindow": false,
+            "leftWindow": false,
+            "navigationBarTitleText": "创建超级管理员"
+          }
+        },
+        {
+          "path": "icons/icons",
+          "style": {
+            "navigationBarTitleText": "图标"
+          }
+        }
+      ]
+    }
+  ],
+  "globalStyle": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "管理系统",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "topWindow": {
+    "path": "windows/topWindow",
+    "style": {
+      "height": "60px"
+    },
+    "matchMedia": {
+      "minWidth": 0
+    }
+  },
+  "leftWindow": {
+    "path": "windows/leftWindow",
+    "style": {
+      "width": "240px"
+    }
+  }
 }
